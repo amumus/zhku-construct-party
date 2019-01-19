@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mumu.zhkuconstructparty.biz.mapper.MyNewsMapper" >
+    <!--<resultMap id="BaseResultMap" type="com.mumu.zhkuconstructparty.biz.autoCode.pojo.News" >-->
+        <!--<id column="id" property="id" jdbcType="INTEGER" />-->
+        <!--<result column="title" property="title" jdbcType="VARCHAR" />-->
+        <!--<result column="second_title" property="secondTitle" jdbcType="VARCHAR" />-->
+        <!--<result column="image" property="image" jdbcType="VARCHAR" />-->
+        <!--<result column="author" property="author" jdbcType="VARCHAR" />-->
+        <!--<result column="created" property="created" jdbcType="TIMESTAMP" />-->
+        <!--<result column="state" property="state" jdbcType="BIT" />-->
+    <!--</resultMap>-->
+    <select id="selectNews" resultType="com.mumu.zhkuconstructparty.biz.autoCode.pojo.News"
+            parameterType="com.mumu.zhkuconstructparty.vo.NewsVo.NewsQueryVo">
+        select id, title, second_title, image, author, created, state
+        from `news`
+        WHERE 1=1
+        <if test="id != null">
+            and id = #{id}
+        </if>
+        <if test="title != null">
+            and title like CONCAT('%',#{title},'%')
+        </if>
+        <if test="secondTitle">
+            and second_title like CONCAT('%',#{secondTitle},'%')
+        </if>
+        <if test="">
+
+        </if>
+        limit #{pageStart},#{pageNum};
+    </select>
+    <!--<select id="selectAllNews"-->
+            <!--resultMap="BaseResultMap">-->
+        <!--select id, title, second_title, image, author, created, state-->
+        <!--from `news`-->
+    <!--</select>-->
+    <select id="count"  resultType="java.lang.Integer">
+        select count(1) from `news`;
+    </select>
+</mapper>
