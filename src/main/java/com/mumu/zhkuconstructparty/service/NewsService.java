@@ -3,8 +3,10 @@ package com.mumu.zhkuconstructparty.service;
 import com.mumu.zhkuconstructparty.vo.NewsVo.NewsQueryVo;
 import com.mumu.zhkuconstructparty.vo.NewsVo.NewsVo;
 
-import java.util.List;
+import java.util.Map;
 
 public interface NewsService {
-    List<NewsVo> getNewsList(NewsQueryVo vo);
+    Map getNewsList(NewsQueryVo vo);
+
+    NewsVo getNews(Integer id);
 }

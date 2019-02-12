@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mumu.zhkuconstructparty.biz.autoCode.mapper.NewsContentMapper" >
+  <resultMap id="BaseResultMap" type="com.mumu.zhkuconstructparty.biz.autoCode.pojo.NewsContent" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="news_id" property="newsId" jdbcType="INTEGER" />
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from news_content
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mumu.zhkuconstructparty.biz.autoCode.pojo.NewsContent" >
+    insert into news_content (id, news_id, content
+      )
+    values (#{id,jdbcType=INTEGER}, #{newsId,jdbcType=INTEGER}, #{content,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.mumu.zhkuconstructparty.biz.autoCode.pojo.NewsContent" >
+    update news_content
+    set news_id = #{newsId,jdbcType=INTEGER},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select id, news_id, content
+    from news_content
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, news_id, content
+    from news_content
+  </select>
+</mapper>

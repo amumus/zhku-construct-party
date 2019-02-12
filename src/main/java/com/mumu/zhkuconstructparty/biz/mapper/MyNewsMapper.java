@@ -11,5 +11,6 @@ import java.util.List;
 public interface MyNewsMapper {
     List<News> selectNews(NewsQueryVo vo);
 //    List<News> selectAllNews();
-    int count();
+    int selectNewsCount(NewsQueryVo vo);
+    int updateNewsBySelect(News news);
 }

@@ -19,8 +19,15 @@ public class ResultObject implements Serializable{
     public static ResultObject successResult(){
         return new ResultObject("成功",ResultStatus.SUCCESS,null);
     }
-
-
+    public static ResultObject successResult(Object data){
+        return new ResultObject("成功",ResultStatus.SUCCESS,data);
+    }
+    public static ResultObject failResult(){
+        return new ResultObject("失败",ResultStatus.FAIL,null);
+    }
+    public static ResultObject failResult(Object data){
+        return new ResultObject("失败",ResultStatus.FAIL,data);
+    }
     public String getMessage() {
         return message;
     }

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mumu.zhkuconstructparty.biz.autoCode.mapper.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.mumu.zhkuconstructparty.biz.autoCode.pojo.User" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="identity_code" property="identityCode" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="CHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="political_status" property="politicalStatus" jdbcType="VARCHAR" />
+    <result column="head_img" property="headImg" jdbcType="VARCHAR" />
+    <result column="college" property="college" jdbcType="VARCHAR" />
+    <result column="major" property="major" jdbcType="VARCHAR" />
+    <result column="validata_code" property="validataCode" jdbcType="CHAR" />
+    <result column="outDate" property="outdate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from user
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.mumu.zhkuconstructparty.biz.autoCode.pojo.User" >
+    insert into user (id, identity_code, password, 
+      email, name, user_name, 
+      phone, political_status, head_img, 
+      college, major, validata_code, 
+      outDate)
+    values (#{id,jdbcType=BIGINT}, #{identityCode,jdbcType=VARCHAR}, #{password,jdbcType=CHAR}, 
+      #{email,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{politicalStatus,jdbcType=VARCHAR}, #{headImg,jdbcType=VARCHAR}, 
+      #{college,jdbcType=VARCHAR}, #{major,jdbcType=VARCHAR}, #{validataCode,jdbcType=CHAR}, 
+      #{outdate,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.mumu.zhkuconstructparty.biz.autoCode.pojo.User" >
+    update user
+    set identity_code = #{identityCode,jdbcType=VARCHAR},
+      password = #{password,jdbcType=CHAR},
+      email = #{email,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      user_name = #{userName,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      political_status = #{politicalStatus,jdbcType=VARCHAR},
+      head_img = #{headImg,jdbcType=VARCHAR},
+      college = #{college,jdbcType=VARCHAR},
+      major = #{major,jdbcType=VARCHAR},
+      validata_code = #{validataCode,jdbcType=CHAR},
+      outDate = #{outdate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select id, identity_code, password, email, name, user_name, phone, political_status, 
+    head_img, college, major, validata_code, outDate
+    from user
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, identity_code, password, email, name, user_name, phone, political_status, 
+    head_img, college, major, validata_code, outDate
+    from user
+  </select>
+</mapper>

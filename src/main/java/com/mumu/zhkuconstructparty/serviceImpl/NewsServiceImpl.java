@@ -12,7 +12,9 @@ import org.springframework.stereotype.Service;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class NewsServiceImpl implements NewsService {
@@ -23,13 +25,13 @@ public class NewsServiceImpl implements NewsService {
     private NewsMapper newsMapper;
 
     @Override
-    public List<NewsVo> getNewsList(NewsQueryVo vo) {
+    public Map getNewsList(NewsQueryVo vo) {
 //        if(newsMapper == null){
 //            System.out.println("kong========================================");
 //        }
         List<News> list = myNewsMapper.selectNews(vo);
 //        List<News> list= myNewsMapper.selectAllNews();
-        int count = myNewsMapper.count();
+        int count = myNewsMapper.selectNewsCount(vo);
 //        List<News> list = newsMapper.selectAll();
         List<NewsVo> resList = new ArrayList<>();
         try {
@@ -39,6 +41,15 @@ public class NewsServiceImpl implements NewsService {
         } catch (InvocationTargetException e) {
             e.printStackTrace();
         }
-        return resList;
+        Map map = new HashMap();
+        map.put("data",resList);
+        map.put("count",count);
+        return map;
+    }
+
+    @Override
+    public NewsVo getNews(Integer id) {
+
+        return null;
     }
 }

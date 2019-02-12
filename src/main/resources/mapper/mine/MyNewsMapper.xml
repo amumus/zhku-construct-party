@@ -18,23 +18,82 @@
         <if test="id != null">
             and id = #{id}
         </if>
-        <if test="title != null">
+        <if test="title != null and title != ''">
             and title like CONCAT('%',#{title},'%')
         </if>
-        <if test="secondTitle">
+        <if test="secondTitle != null and secondTitle != ''" >
             and second_title like CONCAT('%',#{secondTitle},'%')
         </if>
-        <if test="">
-
+        <if test="author != null and author != ''">
+            and author like CONCAT('%',#{author},'%')
+        </if>
+        <if test="startTime != null and startTime != ''">
+            and created <![CDATA[>=]]> startTime
+        </if>
+        <if test="endTime != null and endTime != ''">
+            and created <![CDATA[>=]]> endTime
+        </if>
+        <if test="state !=null and state !='">
+            and state = #{state}
         </if>
         limit #{pageStart},#{pageNum};
+        ORDER BY id DESC
     </select>
     <!--<select id="selectAllNews"-->
             <!--resultMap="BaseResultMap">-->
         <!--select id, title, second_title, image, author, created, state-->
         <!--from `news`-->
     <!--</select>-->
-    <select id="count"  resultType="java.lang.Integer">
-        select count(1) from `news`;
+    <select id="selectNewsCount"  resultType="java.lang.Integer"
+            parameterType="com.mumu.zhkuconstructparty.vo.NewsVo.NewsQueryVo">
+        select count(id)
+        from `news`
+        WHERE 1=1
+        <if test="id != null">
+            and id = #{id}
+        </if>
+        <if test="title != null and title != ''">
+            and title like CONCAT('%',#{title},'%')
+        </if>
+        <if test="secondTitle != null and secondTitle != ''" >
+            and second_title like CONCAT('%',#{secondTitle},'%')
+        </if>
+        <if test="author != null and author != ''">
+            and author like CONCAT('%',#{author},'%')
+        </if>
+        <if test="startTime != null and startTime != ''">
+            and created <![CDATA[>=]]> startTime
+        </if>
+        <if test="endTime != null and endTime != ''">
+            and created <![CDATA[>=]]> endTime
+        </if>
+        <if test="state !=null and state !='">
+            and state = #{state}
+        </if>
     </select>
+
+    <update id="updateNewsBySelect"  parameterType="com.mumu.zhkuconstructparty.biz.autoCode.pojo.News">
+        UPDATE `news` SET
+        <trim prefix="set" suffixOverrides=",">
+            <if test="title != null and title != ''">
+                title = #{title} ,
+            </if>
+            <if test="secondTitle != null" >
+                second_title = #{secondTitle} ,
+            </if>
+            <if test="author != null and author != ''">
+                author = #{author} ,
+            </if>
+            <if test="created != null and created != ''">
+                created = #{created},
+            </if>
+            <if test="image !=null">
+                created = #{image},
+            </if>
+            <if test="state !=null and state !='">
+                state = #{state},
+            </if>
+        </trim>
+        WHERE id = #{id}
+    </update>
 </mapper>

@@ -6,6 +6,9 @@ public class NewsQueryVo extends News {
     int pageNum = 10;
     int pageStart = 0;
 
+    String startTime;
+    String endTime;
+
     public int getPageNum() {
         return pageNum;
     }
@@ -20,5 +23,21 @@ public class NewsQueryVo extends News {
 
     public void setPageStart(int pageStart) {
         this.pageStart = pageStart;
+    }
+
+    public String getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
+    }
+
+    public String getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
     }
 }

@@ -25,4 +25,16 @@ public class NewsController {
         resultObject.setData(list);
         return resultObject;
     }
+
+    @RequestMapping("/news/getNews")
+    @ResponseBody ResultObject getNews(Integer id){
+        if(id == null){
+            return ResultObject.successResult();
+        }
+        NewsVo vo = newsService.getNews(id);
+        ResultObject resultObject = ResultObject.successResult();
+        resultObject.setData(vo);
+        return resultObject;
+    }
+
 }
