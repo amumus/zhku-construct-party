@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mumu.zhkuconstructparty.biz.autoCode.mapper.ContentMapper" >
+  <resultMap id="BaseResultMap" type="com.mumu.zhkuconstructparty.biz.autoCode.pojo.Content" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="image" property="image" jdbcType="VARCHAR" />
+    <result column="created" property="created" jdbcType="TIMESTAMP" />
+    <result column="contentType" property="contenttype" jdbcType="INTEGER" />
+    <result column="targetId" property="targetid" jdbcType="INTEGER" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from content
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mumu.zhkuconstructparty.biz.autoCode.pojo.Content" >
+    insert into content (id, title, image, 
+      created, contentType, targetId
+      )
+    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{image,jdbcType=VARCHAR}, 
+      #{created,jdbcType=TIMESTAMP}, #{contenttype,jdbcType=INTEGER}, #{targetid,jdbcType=INTEGER}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.mumu.zhkuconstructparty.biz.autoCode.pojo.Content" >
+    update content
+    set title = #{title,jdbcType=VARCHAR},
+      image = #{image,jdbcType=VARCHAR},
+      created = #{created,jdbcType=TIMESTAMP},
+      contentType = #{contenttype,jdbcType=INTEGER},
+      targetId = #{targetid,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select id, title, image, created, contentType, targetId
+    from content
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, title, image, created, contentType, targetId
+    from content
+  </select>
+</mapper>

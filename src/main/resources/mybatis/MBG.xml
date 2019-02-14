@@ -62,6 +62,7 @@
             <!--&lt;!&ndash; 数据库表主键 &ndash;&gt;-->
             <!--&lt;!&ndash;<generatedKey column="id" sqlStatement="Mysql" identity="true" />&ndash;&gt;-->
         <!--</table>-->
-        <table tableName="%"></table>
+        <!--<table tableName="%"></table>-->
+        <table tableName="system_user"></table>
     </context>
 </generatorConfiguration>
