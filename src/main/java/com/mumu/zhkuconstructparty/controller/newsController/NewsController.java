@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class NewsController {
@@ -20,9 +21,9 @@ public class NewsController {
     @RequestMapping("/news/getNewsList")
     @ResponseBody
     public ResultObject getNewsList(NewsQueryVo vo){
-        List<NewsVo> list = newsService.getNewsList(vo);
+        Map map = newsService.getNewsList(vo);
         ResultObject resultObject = ResultObject.successResult() ;
-        resultObject.setData(list);
+        resultObject.setData(map);
         return resultObject;
     }
 

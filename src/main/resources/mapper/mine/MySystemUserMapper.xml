@@ -3,7 +3,7 @@
 <mapper namespace="com.mumu.zhkuconstructparty.biz.mapper.MySystemUserMapper" >
     <select id="login" resultType="java.lang.Integer">
         select count(id)
-        from
+        from `system_user`
         where `username` = #{username} and `password` = #{password}
     </select>
 </mapper>
