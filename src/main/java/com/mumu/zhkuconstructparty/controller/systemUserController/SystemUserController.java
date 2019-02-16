@@ -6,11 +6,12 @@ import com.mumu.zhkuconstructparty.serviceImpl.SystemUserServiceImpl;
 import com.mumu.zhkuconstructparty.vo.SystemUserVo.SystemUserVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Map;
-
+@CrossOrigin(origins = "*", maxAge = 3600)
 @Controller
 public class SystemUserController {
 
@@ -32,6 +33,7 @@ public class SystemUserController {
             resultObject.setData(map);
         }else{
             resultObject = ResultObject.failResult();
+            resultObject.setMessage("用户名或密码错误");
         }
         return resultObject;
     }
