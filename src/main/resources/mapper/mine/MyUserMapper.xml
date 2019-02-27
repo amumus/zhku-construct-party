@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mumu.zhkuconstructparty.biz.mapper.MyUserMapper" >
+    <select id="listUsers" resultType="com.mumu.zhkuconstructparty.biz.autoCode.pojo.User"
+            parameterType="com.mumu.zhkuconstructparty.vo.UserVo.UserQueryVo">
+        select count(id)
+        from `system_user`
+        where `username` = #{username} and `password` = #{password}
+    </select>
+</mapper>

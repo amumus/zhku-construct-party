@@ -9,4 +9,6 @@ public interface MyUserMapper {
     List<User> listUsers(UserQueryVo vo);
     User login(UserQueryVo vo);
     int updateUserBySelect(User user);
+
+    int coutListUsers(UserQueryVo vo);
 }

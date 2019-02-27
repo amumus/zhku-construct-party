@@ -8,6 +8,7 @@ import com.mumu.zhkuconstructparty.vo.UserVo.UserQueryVo;
 import com.mumu.zhkuconstructparty.vo.UserVo.UserVo;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -20,8 +21,11 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public Map listUser(UserQueryVo vo) {
+        Map map = new HashMap();
         List<User> list = myUserMapper.listUsers(vo);
-
+        int count = myUserMapper.coutListUsers(vo);
+        map.put("data",list);
+        map.put("count",count);
         return null;
     }
 
