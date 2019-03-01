@@ -3,8 +3,84 @@
 <mapper namespace="com.mumu.zhkuconstructparty.biz.mapper.MyUserMapper" >
     <select id="listUsers" resultType="com.mumu.zhkuconstructparty.biz.autoCode.pojo.User"
             parameterType="com.mumu.zhkuconstructparty.vo.UserVo.UserQueryVo">
-        select count(id)
-        from `system_user`
-        where `username` = #{username} and `password` = #{password}
+        select *
+        from `user`
+        where 1=1
+        <if  test="identityCode !=null and identityCode != ''">
+            and `identity_code` like CONCAT(CONCAT('%', #{identityCode}),'%')
+        </if>
+        <if test="name != null and name !=''">
+            and `name` like CONCAT(CONCAT('%',#{name}),'%')
+        </if>
+        <if  test="college !=null and college != ''">
+            and `college` like CONCAT(CONCAT('%', #{college}),'%')
+        </if>
+        <if  test="major !=null and major != ''">
+            and `major` like CONCAT(CONCAT('%', #{major}),'%')
+        </if>
+        limit #{pageStart},#{pageNum};
+        ORDER BY #{orderByColumn} DESC
     </select>
+    <select id="countListUsers" resultType="java.lang.Integer"
+            parameterType="com.mumu.zhkuconstructparty.vo.UserVo.UserQueryVo">
+        select count(1)
+        from `user`
+        where 1=1
+        <if  test="identityCode !=null and identityCode != ''">
+            and `identity_code` like CONCAT(CONCAT('%', #{identityCode}),'%')
+        </if>
+        <if test="name != null and name !=''">
+            and `name` like CONCAT(CONCAT('%',#{name}),'%')
+        </if>
+        <if  test="college !=null and college != ''">
+            and `college` like CONCAT(CONCAT('%', #{college}),'%')
+        </if>
+        <if  test="major !=null and major != ''">
+            and `major` like CONCAT(CONCAT('%', #{major}),'%')
+        </if>
+    </select>
+    <select id="login" resultType="com.mumu.zhkuconstructparty.biz.autoCode.pojo.User"
+        parameterType="com.mumu.zhkuconstructparty.vo.UserVo.UserQueryVo">
+        SELECT * from `user`
+        WHERE identity_code = #{identityCode} and password = #{password}
+    </select>
+    <update id="updateUserBySelect"  parameterType="com.mumu.zhkuconstructparty.biz.autoCode.pojo.User">
+        UPDATE `user`
+        <set>
+            <if  test="password !=null and password != ''">
+                `password` = #{password},
+            </if>
+            <if test="email != null and email !=''">
+                and `email` = #{email},
+            </if>
+            <if  test="name !=null and name != ''">
+                and `name` = #{name},
+            </if>
+            <if  test="userName !=null and userName != ''">
+                and `user_name` = #{userName},
+            </if>
+            <if  test="phone !=null and phone != ''">
+                `phone` = #{phone},
+            </if>
+            <if test="politicalStatus != null and politicalStatus !=''">
+                and `political_status` = #{politicalStatus},
+            </if>
+            <if  test="headImg !=null and headImg != ''">
+                and `head_img` = #{headImg},
+            </if>
+            <if  test="college !=null and college != ''">
+                and `college` = #{college},
+            </if>
+            <if  test="major !=null and major != ''">
+                `major` = #{major},
+            </if>
+            <if test="validataCode != null and validataCode !=''">
+                and `validata_code` = #{validataCode},
+            </if>
+            <if  test="outDate !=null and outDate != ''">
+                and `outDate` = #{outDate},
+            </if>
+        </set>
+        where identity_code = #{identityCode}
+    </update>
 </mapper>
