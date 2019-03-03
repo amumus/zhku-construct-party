@@ -23,12 +23,13 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public Map listUser(UserQueryVo vo) {
+        vo.setPageStart(vo.getPageNum()*vo.getPageStart());
         Map map = new HashMap();
         List<User> list = myUserMapper.listUsers(vo);
         int count = myUserMapper.countListUsers(vo);
         map.put("data",list);
         map.put("count",count);
-        return null;
+        return map;
     }
 
     @Override

@@ -5,7 +5,7 @@ import com.mumu.zhkuconstructparty.biz.autoCode.pojo.User;
 public class UserQueryVo extends User {
     int pageNum = 10;
     int pageStart = 0;
-    String orderByColumn;
+    String orderByColumn = "id";
 
     public String getOrderByColumn() {
         return orderByColumn;

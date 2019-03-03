@@ -19,8 +19,8 @@
             and `major` like CONCAT(CONCAT('%', #{major}),'%')
         </if>
         limit #{pageStart},#{pageNum};
-        ORDER BY #{orderByColumn} DESC
     </select>
+    <!--ORDER BY #{orderByColumn} DESC-->
     <select id="countListUsers" resultType="java.lang.Integer"
             parameterType="com.mumu.zhkuconstructparty.vo.UserVo.UserQueryVo">
         select count(1)
