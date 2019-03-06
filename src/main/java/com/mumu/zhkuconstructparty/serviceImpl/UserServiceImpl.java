@@ -29,6 +29,7 @@ public class UserServiceImpl implements UserService{
         int count = myUserMapper.countListUsers(vo);
         map.put("data",list);
         map.put("count",count);
+        map.put("pages",count / vo.getPageNum());
         return map;
     }
 

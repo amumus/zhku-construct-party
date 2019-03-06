@@ -21,7 +21,7 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @RequestMapping("/portal/listUser")
+    @RequestMapping("/portal/user/listUser")
     @ResponseBody
     public ResultObject getUserList(UserQueryVo vo){
         ResultObject resultObject = new ResultObject();
