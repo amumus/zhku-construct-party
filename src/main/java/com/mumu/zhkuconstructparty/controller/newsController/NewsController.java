@@ -18,7 +18,7 @@ public class NewsController {
     @Autowired
     private NewsService newsService;
 
-    @RequestMapping("/news/getNewsList")
+    @RequestMapping("/uniApp/news/getNewsList")
     @ResponseBody
     public ResultObject getNewsList(NewsQueryVo vo){
         Map map = newsService.getNewsList(vo);
@@ -27,8 +27,9 @@ public class NewsController {
         return resultObject;
     }
 
-    @RequestMapping("/news/getNews")
-    @ResponseBody ResultObject getNews(Integer id){
+    @RequestMapping("/uniApp/news/getNews")
+    @ResponseBody
+    public ResultObject getNews(Integer id){
         if(id == null){
             return ResultObject.successResult();
         }

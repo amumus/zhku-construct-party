@@ -83,4 +83,8 @@
         </set>
         where identity_code = #{identityCode}
     </update>
+    <delete id="">
+
+    </delete>
+
 </mapper>

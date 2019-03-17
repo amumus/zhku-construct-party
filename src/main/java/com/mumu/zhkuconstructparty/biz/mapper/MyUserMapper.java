@@ -11,4 +11,5 @@ public interface MyUserMapper {
     int updateUserBySelect(User user);
 
     int countListUsers(UserQueryVo vo);
+    int deleteByIdentityCode();
 }

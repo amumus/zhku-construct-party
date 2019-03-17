@@ -3,6 +3,7 @@ package com.mumu.zhkuconstructparty.serviceImpl;
 import com.mumu.zhkuconstructparty.biz.autoCode.mapper.UserMapper;
 import com.mumu.zhkuconstructparty.biz.autoCode.pojo.User;
 import com.mumu.zhkuconstructparty.biz.mapper.MyUserMapper;
+import com.mumu.zhkuconstructparty.common.CommonException;
 import com.mumu.zhkuconstructparty.service.UserService;
 import com.mumu.zhkuconstructparty.vo.UserVo.UserQueryVo;
 import com.mumu.zhkuconstructparty.vo.UserVo.UserVo;
@@ -34,12 +35,17 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public Integer addUser(UserVo vo) {
-        return null;
+    public Integer addUser(UserQueryVo vo) {
+        return userMapper.insert(vo);
     }
 
     @Override
-    public Integer updateUser(UserVo vo) {
+    public Integer updateUser(UserQueryVo vo) {
+        return myUserMapper.updateUserBySelect(vo);
+    }
+
+    @Override
+    public Integer deleteByIdentityCode(UserQueryVo vo) throws CommonException {
         return null;
     }
 }

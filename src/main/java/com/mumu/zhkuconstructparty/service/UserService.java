@@ -9,6 +9,8 @@ import java.util.Map;
 
 public interface UserService {
     Map listUser(UserQueryVo vo) throws CommonException;
-    Integer addUser(UserVo vo) throws CommonException;
-    Integer updateUser(UserVo vo)  throws CommonException;
+    Integer addUser(UserQueryVo vo) throws CommonException;
+    Integer updateUser(UserQueryVo vo)  throws CommonException;
+    Integer deleteByIdentityCode(UserQueryVo vo) throws CommonException;
+
 }
