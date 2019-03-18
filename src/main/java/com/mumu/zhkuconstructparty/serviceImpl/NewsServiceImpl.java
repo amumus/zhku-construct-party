@@ -1,9 +1,14 @@
 package com.mumu.zhkuconstructparty.serviceImpl;
 
+import com.alibaba.druid.support.json.JSONUtils;
+import com.mumu.zhkuconstructparty.biz.autoCode.mapper.NewsContentMapper;
 import com.mumu.zhkuconstructparty.biz.autoCode.mapper.NewsMapper;
 import com.mumu.zhkuconstructparty.biz.autoCode.pojo.News;
+import com.mumu.zhkuconstructparty.biz.autoCode.pojo.NewsContent;
+import com.mumu.zhkuconstructparty.biz.mapper.MyNewsContentMapper;
 import com.mumu.zhkuconstructparty.biz.mapper.MyNewsMapper;
 import com.mumu.zhkuconstructparty.service.NewsService;
+import com.mumu.zhkuconstructparty.util.JsonUtils;
 import com.mumu.zhkuconstructparty.vo.NewsVo.NewsQueryVo;
 import com.mumu.zhkuconstructparty.vo.NewsVo.NewsVo;
 import org.apache.commons.beanutils.BeanUtils;
@@ -23,6 +28,11 @@ public class NewsServiceImpl implements NewsService {
     private MyNewsMapper myNewsMapper;
     @Autowired
     private NewsMapper newsMapper;
+    @Autowired
+    private NewsContentMapper newsContentMapper;
+    @Autowired
+    private MyNewsContentMapper myNewsContentMapper;
+
 
     @Override
     public Map getNewsList(NewsQueryVo vo) {
@@ -49,7 +59,11 @@ public class NewsServiceImpl implements NewsService {
 
     @Override
     public NewsVo getNews(Integer id) {
-
-        return null;
+        News news = newsMapper.selectByPrimaryKey(id);
+        NewsContent newsContent =myNewsContentMapper.findNewsContentByNewsId(id);
+        String newsString = JsonUtils.toJSONString(news);
+        NewsVo newsVo = JsonUtils.jsonToBean(newsString,NewsVo.class);
+        newsVo.setNewsContent(newsContent);
+        return newsVo;
     }
 }
