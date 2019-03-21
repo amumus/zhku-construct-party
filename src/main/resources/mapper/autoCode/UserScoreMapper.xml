@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mumu.zhkuconstructparty.biz.autoCode.mapper.UserScoreMapper" >
+  <resultMap id="BaseResultMap" type="com.mumu.zhkuconstructparty.biz.autoCode.pojo.UserScore" >
+    <id column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="score" property="score" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="last_mod_data" property="lastModData" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from user_score
+    where user_id = #{userId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mumu.zhkuconstructparty.biz.autoCode.pojo.UserScore" >
+    insert into user_score (user_id, score, name, 
+      last_mod_data)
+    values (#{userId,jdbcType=INTEGER}, #{score,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
+      #{lastModData,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.mumu.zhkuconstructparty.biz.autoCode.pojo.UserScore" >
+    update user_score
+    set score = #{score,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
+      last_mod_data = #{lastModData,jdbcType=TIMESTAMP}
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select user_id, score, name, last_mod_data
+    from user_score
+    where user_id = #{userId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select user_id, score, name, last_mod_data
+    from user_score
+  </select>
+</mapper>

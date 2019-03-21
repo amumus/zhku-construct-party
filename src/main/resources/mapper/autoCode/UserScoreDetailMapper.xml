@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mumu.zhkuconstructparty.biz.autoCode.mapper.UserScoreDetailMapper" >
+  <resultMap id="BaseResultMap" type="com.mumu.zhkuconstructparty.biz.autoCode.pojo.UserScoreDetail" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="occur_time" property="occurTime" jdbcType="TIMESTAMP" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="score_id" property="scoreId" jdbcType="INTEGER" />
+    <result column="integral_score" property="integralScore" jdbcType="INTEGER" />
+    <result column="remark" property="remark" jdbcType="INTEGER" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from user_score_detail
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mumu.zhkuconstructparty.biz.autoCode.pojo.UserScoreDetail" >
+    insert into user_score_detail (id, occur_time, user_id, 
+      score_id, integral_score, remark
+      )
+    values (#{id,jdbcType=INTEGER}, #{occurTime,jdbcType=TIMESTAMP}, #{userId,jdbcType=INTEGER}, 
+      #{scoreId,jdbcType=INTEGER}, #{integralScore,jdbcType=INTEGER}, #{remark,jdbcType=INTEGER}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.mumu.zhkuconstructparty.biz.autoCode.pojo.UserScoreDetail" >
+    update user_score_detail
+    set occur_time = #{occurTime,jdbcType=TIMESTAMP},
+      user_id = #{userId,jdbcType=INTEGER},
+      score_id = #{scoreId,jdbcType=INTEGER},
+      integral_score = #{integralScore,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select id, occur_time, user_id, score_id, integral_score, remark
+    from user_score_detail
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, occur_time, user_id, score_id, integral_score, remark
+    from user_score_detail
+  </select>
+</mapper>

@@ -63,6 +63,10 @@
             <!--&lt;!&ndash;<generatedKey column="id" sqlStatement="Mysql" identity="true" />&ndash;&gt;-->
         <!--</table>-->
         <!--<table tableName="%"></table>-->
-        <table tableName="system_user"></table>
+        <table tableName="comment"></table>
+        <table tableName="score_task"></table>
+        <table tableName="user_score"></table>
+        <table tableName="user_score_detail"></table>
+        <table tableName="video"></table>
     </context>
 </generatorConfiguration>

@@ -33,11 +33,11 @@
         <if test="endTime != null and endTime != ''">
             and created <![CDATA[>=]]> endTime
         </if>
-        <if test="state !=null and state !='">
+        <if test="state !=null and state !=''">
             and state = #{state}
         </if>
-        limit #{pageStart},#{pageNum};
-        ORDER BY id DESC
+        ORDER BY created DESC
+        limit #{pageStart},#{pageNum}
     </select>
     <!--<select id="selectAllNews"-->
             <!--resultMap="BaseResultMap">-->
@@ -67,7 +67,7 @@
         <if test="endTime != null and endTime != ''">
             and created <![CDATA[>=]]> endTime
         </if>
-        <if test="state !=null and state !='">
+        <if test="state !=null and state !=''">
             and state = #{state}
         </if>
     </select>

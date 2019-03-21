@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mumu.zhkuconstructparty.biz.autoCode.mapper.CommentMapper" >
+  <resultMap id="BaseResultMap" type="com.mumu.zhkuconstructparty.biz.autoCode.pojo.Comment" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="target_id" property="targetId" jdbcType="INTEGER" />
+    <result column="parent_id" property="parentId" jdbcType="INTEGER" />
+    <result column="created" property="created" jdbcType="TIMESTAMP" />
+    <result column="comment_content" property="commentContent" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from comment
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mumu.zhkuconstructparty.biz.autoCode.pojo.Comment" >
+    insert into comment (id, type, target_id, 
+      parent_id, created, comment_content
+      )
+    values (#{id,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, #{targetId,jdbcType=INTEGER}, 
+      #{parentId,jdbcType=INTEGER}, #{created,jdbcType=TIMESTAMP}, #{commentContent,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.mumu.zhkuconstructparty.biz.autoCode.pojo.Comment" >
+    update comment
+    set type = #{type,jdbcType=INTEGER},
+      target_id = #{targetId,jdbcType=INTEGER},
+      parent_id = #{parentId,jdbcType=INTEGER},
+      created = #{created,jdbcType=TIMESTAMP},
+      comment_content = #{commentContent,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select id, type, target_id, parent_id, created, comment_content
+    from comment
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, type, target_id, parent_id, created, comment_content
+    from comment
+  </select>
+</mapper>
