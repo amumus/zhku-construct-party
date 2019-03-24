@@ -13,11 +13,11 @@ public class NewsHelper {
         SimpleDateFormat myFmt=new SimpleDateFormat("yyyy年MM月dd日 HH时mm分ss秒");
         for(News news:list){
             NewsVo newsVo = new NewsVo();
-            newsVo.setPublish_data(myFmt.format(news.getAuthor()));
+            newsVo.setPublish_data(myFmt.format(news.getCreated()));
             newsVo.setAuthor(news.getAuthor());
             newsVo.setId(news.getId());
             newsVo.setSecondTitle(news.getSecondTitle());
-            newsVo.setImage(newsVo.getImage());
+            newsVo.setImage(news.getImage());
             newsVo.setTitle(news.getTitle());
             newsVoList.add(newsVo);
         }

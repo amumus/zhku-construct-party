@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mumu.zhkuconstructparty.biz.mapper.MyVideoMapper" >
+
+    <select id="getVideoList" resultType="com.mumu.zhkuconstructparty.biz.autoCode.pojo.Video"
+            parameterType="com.mumu.zhkuconstructparty.dto.VideoDto.VideoDto">
+        select *
+        from `video`
+        WHERE 1=1
+        <if test="id != null">
+            and id = #{id}
+        </if>
+        <if test="name !=null and name !=''">
+            and name like concat('%'，#{name}，'%')
+        </if>
+        <if test="author !=null and author !=''">
+            and name like concat('%'，#{author}，'%')
+        </if>
+        ORDER BY created DESC
+        limit #{pageStart},#{pageNum}
+    </select>
+    <select id="getVideoListCount" resultType="java.lang.Integer"
+            parameterType="com.mumu.zhkuconstructparty.dto.VideoDto.VideoDto">
+        select count(*)
+        from `video`
+        WHERE 1=1
+        <if test="id != null">
+            and id = #{id}
+        </if>
+        <if test="name !=null and name !=''">
+            and name like concat('%'，#{name}，'%')
+        </if>
+        <if test="author !=null and author !=''">
+            and name like concat('%'，#{author}，'%')
+        </if>
+    </select>
+
+</mapper>

@@ -16,6 +16,8 @@ public class Video implements Serializable {
 
     private Date created;
 
+    private Integer videoType;
+
     private String content;
 
     private static final long serialVersionUID = 1L;
@@ -68,6 +70,14 @@ public class Video implements Serializable {
         this.created = created;
     }
 
+    public Integer getVideoType() {
+        return videoType;
+    }
+
+    public void setVideoType(Integer videoType) {
+        this.videoType = videoType;
+    }
+
     public String getContent() {
         return content;
     }
@@ -88,6 +98,7 @@ public class Video implements Serializable {
         sb.append(", img=").append(img);
         sb.append(", author=").append(author);
         sb.append(", created=").append(created);
+        sb.append(", videoType=").append(videoType);
         sb.append(", content=").append(content);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");

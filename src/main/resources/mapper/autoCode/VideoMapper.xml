@@ -8,6 +8,7 @@
     <result column="img" property="img" jdbcType="VARCHAR" />
     <result column="author" property="author" jdbcType="VARCHAR" />
     <result column="created" property="created" jdbcType="TIMESTAMP" />
+    <result column="video_type" property="videoType" jdbcType="INTEGER" />
     <result column="content" property="content" jdbcType="LONGVARCHAR" />
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
@@ -17,10 +18,10 @@
   <insert id="insert" parameterType="com.mumu.zhkuconstructparty.biz.autoCode.pojo.Video" >
     insert into video (id, url, name, 
       img, author, created, 
-      content)
+      video_type, content)
     values (#{id,jdbcType=INTEGER}, #{url,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
       #{img,jdbcType=VARCHAR}, #{author,jdbcType=VARCHAR}, #{created,jdbcType=TIMESTAMP}, 
-      #{content,jdbcType=LONGVARCHAR})
+      #{videoType,jdbcType=INTEGER}, #{content,jdbcType=LONGVARCHAR})
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.mumu.zhkuconstructparty.biz.autoCode.pojo.Video" >
     update video
@@ -29,16 +30,17 @@
       img = #{img,jdbcType=VARCHAR},
       author = #{author,jdbcType=VARCHAR},
       created = #{created,jdbcType=TIMESTAMP},
+      video_type = #{videoType,jdbcType=INTEGER},
       content = #{content,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select id, url, name, img, author, created, content
+    select id, url, name, img, author, created, video_type, content
     from video
     where id = #{id,jdbcType=INTEGER}
   </select>
   <select id="selectAll" resultMap="BaseResultMap" >
-    select id, url, name, img, author, created, content
+    select id, url, name, img, author, created, video_type, content
     from video
   </select>
 </mapper>

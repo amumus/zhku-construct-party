@@ -7,6 +7,8 @@
     <result column="target_id" property="targetId" jdbcType="INTEGER" />
     <result column="parent_id" property="parentId" jdbcType="INTEGER" />
     <result column="created" property="created" jdbcType="TIMESTAMP" />
+    <result column="root_id" property="rootId" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
     <result column="comment_content" property="commentContent" jdbcType="LONGVARCHAR" />
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
@@ -15,11 +17,11 @@
   </delete>
   <insert id="insert" parameterType="com.mumu.zhkuconstructparty.biz.autoCode.pojo.Comment" >
     insert into comment (id, type, target_id, 
-      parent_id, created, comment_content
-      )
+      parent_id, created, root_id, 
+      user_id, comment_content)
     values (#{id,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, #{targetId,jdbcType=INTEGER}, 
-      #{parentId,jdbcType=INTEGER}, #{created,jdbcType=TIMESTAMP}, #{commentContent,jdbcType=LONGVARCHAR}
-      )
+      #{parentId,jdbcType=INTEGER}, #{created,jdbcType=TIMESTAMP}, #{rootId,jdbcType=INTEGER}, 
+      #{userId,jdbcType=INTEGER}, #{commentContent,jdbcType=LONGVARCHAR})
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.mumu.zhkuconstructparty.biz.autoCode.pojo.Comment" >
     update comment
@@ -27,16 +29,18 @@
       target_id = #{targetId,jdbcType=INTEGER},
       parent_id = #{parentId,jdbcType=INTEGER},
       created = #{created,jdbcType=TIMESTAMP},
+      root_id = #{rootId,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
       comment_content = #{commentContent,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select id, type, target_id, parent_id, created, comment_content
+    select id, type, target_id, parent_id, created, root_id, user_id, comment_content
     from comment
     where id = #{id,jdbcType=INTEGER}
   </select>
   <select id="selectAll" resultMap="BaseResultMap" >
-    select id, type, target_id, parent_id, created, comment_content
+    select id, type, target_id, parent_id, created, root_id, user_id, comment_content
     from comment
   </select>
 </mapper>

@@ -31,12 +31,12 @@ public class VideoUploadService {
         String bucketName = "construct-party-1256364044";
 
 
-        File localFile = new File("C:\\Users\\mumu\\Videos\\test1.mp4");
+        File localFile = new File("D:\\HBuilderProjects\\ConstructParty\\ConstructParty\\static\\img\\score_bg.jpg");
 //        File localFile = new File("C:\\Users\\mumu\\Pictures\\1.jpg");
         System.out.println(localFile.getName());
         // 指定要上传到 COS 上对象键
 //        String key = "video/1.jpg";
-        String key = "test1.mp4";
+        String key = "score_bg.jpg";
         PutObjectRequest putObjectRequest = new PutObjectRequest(bucketName, key, localFile);
         PutObjectResult putObjectResult = cosClient.putObject(putObjectRequest);
         String etag = putObjectResult.getETag();
