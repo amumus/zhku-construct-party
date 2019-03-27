@@ -14,7 +14,7 @@ public class UserScoreDetail implements Serializable {
 
     private Integer integralScore;
 
-    private Integer remark;
+    private String remark;
 
     private static final long serialVersionUID = 1L;
 
@@ -58,12 +58,12 @@ public class UserScoreDetail implements Serializable {
         this.integralScore = integralScore;
     }
 
-    public Integer getRemark() {
+    public String getRemark() {
         return remark;
     }
 
-    public void setRemark(Integer remark) {
-        this.remark = remark;
+    public void setRemark(String remark) {
+        this.remark = remark == null ? null : remark.trim();
     }
 
     @Override

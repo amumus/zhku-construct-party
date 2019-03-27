@@ -83,8 +83,11 @@
         </set>
         where identity_code = #{identityCode}
     </update>
-    <delete id="">
-
-    </delete>
-
+    <select id="findByIds" parameterType="java.util.List" resultType="com.mumu.zhkuconstructparty.biz.autoCode.pojo.User">
+        select * from `user` where
+        id IN
+        <foreach collection="list" item="id" index="index" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </select>
 </mapper>

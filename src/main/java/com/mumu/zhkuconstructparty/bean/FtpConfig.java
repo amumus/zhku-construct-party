@@ -1,4 +1,4 @@
-package com.mumu.zhkuconstructparty.util;
+package com.mumu.zhkuconstructparty.bean;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;

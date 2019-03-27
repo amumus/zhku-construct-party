@@ -1,5 +1,6 @@
 package com.mumu.zhkuconstructparty.service;
 
+import com.mumu.zhkuconstructparty.biz.autoCode.pojo.User;
 import com.mumu.zhkuconstructparty.common.CommonException;
 import com.mumu.zhkuconstructparty.vo.UserVo.UserQueryVo;
 import com.mumu.zhkuconstructparty.vo.UserVo.UserVo;
@@ -13,4 +14,5 @@ public interface UserService {
     Integer updateUser(UserQueryVo vo)  throws CommonException;
     Integer deleteByIdentityCode(UserQueryVo vo) throws CommonException;
 
+    User login(UserQueryVo user);
 }

@@ -7,7 +7,7 @@
     <result column="user_id" property="userId" jdbcType="INTEGER" />
     <result column="score_id" property="scoreId" jdbcType="INTEGER" />
     <result column="integral_score" property="integralScore" jdbcType="INTEGER" />
-    <result column="remark" property="remark" jdbcType="INTEGER" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from user_score_detail
@@ -18,7 +18,7 @@
       score_id, integral_score, remark
       )
     values (#{id,jdbcType=INTEGER}, #{occurTime,jdbcType=TIMESTAMP}, #{userId,jdbcType=INTEGER}, 
-      #{scoreId,jdbcType=INTEGER}, #{integralScore,jdbcType=INTEGER}, #{remark,jdbcType=INTEGER}
+      #{scoreId,jdbcType=INTEGER}, #{integralScore,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}
       )
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.mumu.zhkuconstructparty.biz.autoCode.pojo.UserScoreDetail" >
@@ -27,7 +27,7 @@
       user_id = #{userId,jdbcType=INTEGER},
       score_id = #{scoreId,jdbcType=INTEGER},
       integral_score = #{integralScore,jdbcType=INTEGER},
-      remark = #{remark,jdbcType=INTEGER}
+      remark = #{remark,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >

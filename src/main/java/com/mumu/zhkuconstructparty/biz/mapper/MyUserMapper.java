@@ -8,8 +8,10 @@ import java.util.List;
 public interface MyUserMapper {
     List<User> listUsers(UserQueryVo vo);
     User login(UserQueryVo vo);
-    int updateUserBySelect(User user);
+    int updateUserBySelect(UserQueryVo user);
 
     int countListUsers(UserQueryVo vo);
     int deleteByIdentityCode();
+
+    List<User> findByIds(List<Integer> list);
 }

@@ -1,5 +1,6 @@
 package com.mumu.zhkuconstructparty.controller.userController;
 
+import com.mumu.zhkuconstructparty.biz.autoCode.pojo.User;
 import com.mumu.zhkuconstructparty.common.CommonException;
 import com.mumu.zhkuconstructparty.common.ResultObject;
 import com.mumu.zhkuconstructparty.common.ResultStatus;
@@ -37,5 +38,23 @@ public class UserController {
         }
         return resultObject;
     }
+
+
+    @RequestMapping("/uniApp/user/login")
+    @ResponseBody
+    public ResultObject login(UserQueryVo user){
+        ResultObject resultObject = ResultObject.failResult();
+
+        User result = userService.login(user);
+        if(result != null){
+            resultObject.setData(result);
+            resultObject.setStatus(ResultStatus.SUCCESS);
+            resultObject.setMessage("登录成功");
+        }
+        return resultObject;
+    }
+
+
+
 
 }

@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import com.mumu.zhkuconstructparty.bean.FtpConfig;
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
@@ -23,7 +24,7 @@ public class FtpUtil {
      *@return 若上传成功，返回图片的访问路径，若上传失败，返回null
      * @throws IOException
      */
-    public static String pictureUploadByConfig(FtpConfig ftpConfig,String picNewName,String picSavePath,InputStream inputStream) throws IOException{
+    public static String pictureUploadByConfig(FtpConfig ftpConfig, String picNewName, String picSavePath, InputStream inputStream) throws IOException{
  
         String picHttpPath = null;
  

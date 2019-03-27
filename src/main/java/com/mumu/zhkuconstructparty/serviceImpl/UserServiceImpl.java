@@ -48,4 +48,12 @@ public class UserServiceImpl implements UserService{
     public Integer deleteByIdentityCode(UserQueryVo vo) throws CommonException {
         return null;
     }
+
+    @Override
+    public User login(UserQueryVo user) {
+
+        return myUserMapper.login(user);
+    }
+
+
 }

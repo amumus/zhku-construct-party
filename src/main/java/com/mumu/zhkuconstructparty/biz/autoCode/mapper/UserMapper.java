@@ -4,11 +4,11 @@ import com.mumu.zhkuconstructparty.biz.autoCode.pojo.User;
 import java.util.List;
 
 public interface UserMapper {
-    int deleteByPrimaryKey(Long id);
+    int deleteByPrimaryKey(Integer id);
 
     int insert(User record);
 
-    User selectByPrimaryKey(Long id);
+    User selectByPrimaryKey(Integer id);
 
     List<User> selectAll();
 

@@ -18,6 +18,8 @@ public class Comment implements Serializable {
 
     private Integer userId;
 
+    private Integer parentUserId;
+
     private String commentContent;
 
     private static final long serialVersionUID = 1L;
@@ -78,6 +80,14 @@ public class Comment implements Serializable {
         this.userId = userId;
     }
 
+    public Integer getParentUserId() {
+        return parentUserId;
+    }
+
+    public void setParentUserId(Integer parentUserId) {
+        this.parentUserId = parentUserId;
+    }
+
     public String getCommentContent() {
         return commentContent;
     }
@@ -99,6 +109,7 @@ public class Comment implements Serializable {
         sb.append(", created=").append(created);
         sb.append(", rootId=").append(rootId);
         sb.append(", userId=").append(userId);
+        sb.append(", parentUserId=").append(parentUserId);
         sb.append(", commentContent=").append(commentContent);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
