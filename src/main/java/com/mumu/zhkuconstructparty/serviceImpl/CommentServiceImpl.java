@@ -2,9 +2,13 @@ package com.mumu.zhkuconstructparty.serviceImpl;
 
 import com.mumu.zhkuconstructparty.biz.autoCode.mapper.CommentMapper;
 import com.mumu.zhkuconstructparty.biz.autoCode.pojo.Comment;
+import com.mumu.zhkuconstructparty.biz.autoCode.pojo.News;
 import com.mumu.zhkuconstructparty.biz.autoCode.pojo.User;
+import com.mumu.zhkuconstructparty.biz.autoCode.pojo.Video;
 import com.mumu.zhkuconstructparty.biz.mapper.MyCommentMapper;
+import com.mumu.zhkuconstructparty.biz.mapper.MyNewsMapper;
 import com.mumu.zhkuconstructparty.biz.mapper.MyUserMapper;
+import com.mumu.zhkuconstructparty.biz.mapper.MyVideoMapper;
 import com.mumu.zhkuconstructparty.common.CommonException;
 import com.mumu.zhkuconstructparty.common.ScoreTaskValue;
 import com.mumu.zhkuconstructparty.dto.CommentDto.CommentDto;
@@ -12,6 +16,7 @@ import com.mumu.zhkuconstructparty.helper.CommentHelper;
 import com.mumu.zhkuconstructparty.service.CommentService;
 import com.mumu.zhkuconstructparty.service.ScoreService;
 import com.mumu.zhkuconstructparty.vo.CommentVo.CommentVo;
+import org.apache.commons.collections.ListUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +33,12 @@ public class CommentServiceImpl implements CommentService {
     MyUserMapper myUserMapper;
     @Autowired
     ScoreService scoreService;
+    @Autowired
+    MyNewsMapper myNewsMapper;
+    @Autowired
+    MyVideoMapper myVideoMapper;
+
+
 
     CommentHelper helper = new CommentHelper();
 
@@ -82,5 +93,71 @@ public class CommentServiceImpl implements CommentService {
             map.put("message","插入失败");
         }
         return map;
+    }
+
+    @Override
+    public Map getMyCommentList(CommentDto commentDto) {
+        commentDto.setPageStart(commentDto.getPageStart()*commentDto.getPageNum());
+        Map result = new HashMap();
+        List<Comment> commentList = myCommentMapper.getMyCommentList(commentDto);
+        List<Integer> newsIdList = new ArrayList<>();
+        List<Integer> videoIdList = new ArrayList<>();
+        List<Integer> userIdList = new ArrayList<>();
+        for( Comment  c: commentList ){
+            if(c.getType() == 1){
+                newsIdList.add(c.getTargetId());
+            }else if(c.getType() == 2){
+                videoIdList.add(c.getTargetId());
+            }
+            userIdList.add(c.getParentUserId());
+        }
+        List<News> newsList = null;
+        if(!newsIdList.isEmpty()){
+            newsList = myNewsMapper.findByIds(newsIdList);
+        }
+        List<Video> videoList = null;
+        if(!videoIdList.isEmpty()){
+            videoList = myVideoMapper.findByIds(videoIdList);
+        }
+        List<User> userList = myUserMapper.findByIds(userIdList);
+        Map<Integer,String> newsMap = new HashMap();
+        Map<Integer,String> videoMap = new HashMap();
+        Map<Integer,String> userMap = new HashMap();
+        if(newsList != null && !newsList.isEmpty()){
+            for(News n:newsList){
+                newsMap.put(n.getId(),n.getTitle());
+            }
+        }
+        if(videoList != null && !videoList.isEmpty()){
+            for(Video v:videoList){
+                videoMap.put(v.getId(),v.getName());
+            }
+        }
+        if(userList != null && !userList.isEmpty()){
+            for(User u :userList){
+                userMap.put(u.getId(),u.getUserName());
+            }
+        }
+
+        CommentHelper commentHelper = new CommentHelper();
+
+        List<CommentVo> resultList = new ArrayList<>();
+        for( Comment c: commentList ){
+            CommentVo vo = commentHelper.comment2Vo(c);
+            if(vo.getType() == 1){
+                vo.setTargetTitle(newsMap.get(vo.getTargetId()));
+            }else if(vo.getType() == 2){
+                vo.setTargetTitle(videoMap.get(vo.getTargetId()));
+            }
+            vo.setAnswer(userMap.get(vo.getParentUserId()));
+            resultList.add(vo);
+        }
+
+
+
+        result.put("list",resultList);
+        Integer count = myCommentMapper.getMyCommentListCount(commentDto);
+        result.put("count",count);
+        return result;
     }
 }

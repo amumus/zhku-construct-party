@@ -13,4 +13,6 @@ public interface MyNewsMapper {
 //    List<News> selectAllNews();
     int selectNewsCount(NewsQueryVo vo);
     int updateNewsBySelect(News news);
+
+    List<News> findByIds(List<Integer> list);
 }

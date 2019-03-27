@@ -11,10 +11,10 @@
             and id = #{id}
         </if>
         <if test="name !=null and name !=''">
-            and name like concat('%'，#{name}，'%')
+            and name like concat('%',#{name},'%')
         </if>
         <if test="author !=null and author !=''">
-            and name like concat('%'，#{author}，'%')
+            and name like concat('%',#{author},'%')
         </if>
         ORDER BY created DESC
         limit #{pageStart},#{pageNum}
@@ -28,11 +28,19 @@
             and id = #{id}
         </if>
         <if test="name !=null and name !=''">
-            and name like concat('%'，#{name}，'%')
+            and name like concat('%',#{name},'%')
         </if>
         <if test="author !=null and author !=''">
-            and name like concat('%'，#{author}，'%')
+            and name like concat('%',#{author},'%')
         </if>
+    </select>
+
+    <select id="findByIds" parameterType="java.util.List" resultType="com.mumu.zhkuconstructparty.biz.autoCode.pojo.Video">
+        select * from `video` where
+        id IN
+        <foreach collection="list" item="id" index="index" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
     </select>
 
 </mapper>

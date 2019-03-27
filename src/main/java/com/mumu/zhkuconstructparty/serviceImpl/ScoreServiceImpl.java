@@ -74,7 +74,9 @@ public class ScoreServiceImpl implements ScoreService {
                 break;
              //学习新闻满10分钟，积分加10分
             case ScoreTaskValue.STUDY_NEWS_TIME:
-                ;
+
+
+
                 break;
             //学习视频满10分钟，积分加10分
             case ScoreTaskValue.STUDY_VIDEO_TIME:

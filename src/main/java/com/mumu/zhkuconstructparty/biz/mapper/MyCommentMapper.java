@@ -9,4 +9,7 @@ public interface MyCommentMapper {
     List<Comment> getCommentListByIdAndType(CommentDto commentDto);
 
 
+    List<Comment> getMyCommentList(CommentDto commentDto);
+
+    Integer getMyCommentListCount(CommentDto commentDto);
 }

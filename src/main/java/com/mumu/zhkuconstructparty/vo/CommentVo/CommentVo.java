@@ -7,6 +7,27 @@ public class CommentVo extends Comment {
     String userImage;
     String publishDate;
 
+    //回复对象的名称
+    String answer;
+    //文章或视频的标题
+    String targetTitle;
+
+    public String getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(String answer) {
+        this.answer = answer;
+    }
+
+    public String getTargetTitle() {
+        return targetTitle;
+    }
+
+    public void setTargetTitle(String targetTitle) {
+        this.targetTitle = targetTitle;
+    }
+
     public String getUserImage() {
         return userImage;
     }

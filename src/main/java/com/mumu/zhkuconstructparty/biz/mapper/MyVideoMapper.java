@@ -9,4 +9,6 @@ public interface MyVideoMapper {
     List<Video> getVideoList(VideoDto videoDto);
 
     Integer getVideoListCount(VideoDto videoDto);
+
+    List<Video> findByIds(List<Integer> videoIdList);
 }

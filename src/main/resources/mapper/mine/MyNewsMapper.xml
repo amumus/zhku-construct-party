@@ -96,4 +96,13 @@
         </trim>
         WHERE id = #{id}
     </update>
+
+    <select id="findByIds" parameterType="java.util.List" resultType="com.mumu.zhkuconstructparty.biz.autoCode.pojo.News">
+        select * from `news` where
+        id IN
+        <foreach collection="list" item="id" index="index" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </select>
+
 </mapper>

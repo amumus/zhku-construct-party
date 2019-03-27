@@ -16,10 +16,50 @@
           AND parent_id = #{parentId}
         </if>
         <if test="rootId != null">
-            AND root_id = #{root_id}
+            AND root_id = #{rootId}
         </if>
         ORDER BY created DESC
         limit #{pageStart},#{pageNum}
     </select>
+
+    <select id="getMyCommentList" resultType="com.mumu.zhkuconstructparty.biz.autoCode.pojo.Comment"
+            parameterType="com.mumu.zhkuconstructparty.dto.CommentDto.CommentDto">
+        SELECT * FROM `comment`
+        WHERE 1=1
+        <if test="type != null">
+            AND `type` = #{type}
+        </if>
+        <if test="targetId != null">
+            AND `target_id` = #{targetId}
+        </if>
+        <if test="parentId != null">
+            AND parent_id = #{parentId}
+        </if>
+        <if test="rootId != null">
+            AND root_id = #{rootId}
+        </if>
+        AND `USER_ID` = #{userId}
+        ORDER BY created DESC
+        limit #{pageStart},#{pageNum}
+    </select>
+    <select id="getMyCommentListCount" resultType="com.mumu.zhkuconstructparty.biz.autoCode.pojo.Comment"
+            parameterType="com.mumu.zhkuconstructparty.dto.CommentDto.CommentDto">
+        SELECT COUNT(*) FROM `comment`
+        WHERE 1=1
+        <if test="type != null">
+            AND `type` = #{type}
+        </if>
+        <if test="targetId != null">
+            AND `target_id` = #{targetId}
+        </if>
+        <if test="parentId != null">
+            AND parent_id = #{parentId}
+        </if>
+        <if test="rootId != null">
+            AND root_id = #{rootId}
+        </if>
+        AND `USER_ID` = #{userId}
+    </select>
+
 
 </mapper>
