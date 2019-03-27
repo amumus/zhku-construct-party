@@ -9,4 +9,11 @@
              <if test="lastModData != null">`last_mod_data`=#{lastModData,jdbcType=TIMESTAMP}</if>
         </set> where `user_id` = #{userId}
     </update>
+
+    <select id="getScoreDetial" parameterType="com.mumu.zhkuconstructparty.dto.ScoreDto.UserScoreDto" resultType="com.mumu.zhkuconstructparty.biz.autoCode.pojo.UserScoreDetail">
+        select * from user_score_detail
+        WHERE user_id = #{userId}
+        ORDER BY occur_time DESC
+        limit #{pageStart},#{pageNum}
+    </select>
 </mapper>

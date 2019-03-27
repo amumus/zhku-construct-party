@@ -9,6 +9,7 @@ import com.mumu.zhkuconstructparty.biz.autoCode.pojo.UserScoreDetail;
 import com.mumu.zhkuconstructparty.biz.mapper.MyUserScoreDetailMapper;
 import com.mumu.zhkuconstructparty.biz.mapper.MyUserScoreMapper;
 import com.mumu.zhkuconstructparty.common.ScoreTaskValue;
+import com.mumu.zhkuconstructparty.dto.ScoreDto.UserScoreDto;
 import com.mumu.zhkuconstructparty.service.ScoreService;
 import com.mumu.zhkuconstructparty.util.DateUtil;
 import org.apache.commons.lang.StringUtils;
@@ -97,5 +98,18 @@ public class ScoreServiceImpl implements ScoreService {
                 break;
             default:
         }
+    }
+
+    @Override
+    public Map getScoreDetial(UserScoreDto userScoreDto) {
+        Map result = new HashMap();
+        List<UserScoreDetail> userScoreList= myUserScoreMapper.getScoreDetial(userScoreDto);
+        result.put("list",userScoreList);
+        return result;
+    }
+
+    @Override
+    public UserScore getUserScoreById(Integer userId) {
+        return userScoreMapper.selectByPrimaryKey(userId);
     }
 }
