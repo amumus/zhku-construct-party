@@ -6,6 +6,15 @@ public class UserQueryVo extends User {
     int pageNum = 10;
     int pageStart = 0;
     String orderByColumn = "id";
+    String keyword ;
+
+    public String getKeyword() {
+        return keyword;
+    }
+
+    public void setKeyword(String keyword) {
+        this.keyword = keyword;
+    }
 
     public String getOrderByColumn() {
         return orderByColumn;

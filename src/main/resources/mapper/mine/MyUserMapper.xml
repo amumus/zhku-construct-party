@@ -18,6 +18,15 @@
         <if  test="major !=null and major != ''">
             and `major` like CONCAT(CONCAT('%', #{major}),'%')
         </if>
+        <if  test="keyword !=null and keyword != ''">
+            AND (
+            `major` LIKE CONCAT('%', #{keyword},'%')
+            OR `name` LIKE CONCAT('%', #{keyword},'%') OR
+            `identity_code` LIKE CONCAT('%', #{keyword},'%') OR
+            `college` LIKE CONCAT('%', #{keyword},'%') )
+
+        </if>
+        order by `identity_code`
         limit #{pageStart},#{pageNum};
     </select>
     <!--ORDER BY #{orderByColumn} DESC-->
@@ -37,6 +46,14 @@
         </if>
         <if  test="major !=null and major != ''">
             and `major` like CONCAT(CONCAT('%', #{major}),'%')
+        </if>
+        <if  test="keyword !=null and keyword != ''">
+            AND (
+            `major` LIKE CONCAT('%', #{keyword},'%')
+            OR `name` LIKE CONCAT('%', #{keyword},'%') OR
+            `identity_code` LIKE CONCAT('%', #{keyword},'%') OR
+            `college` LIKE CONCAT('%', #{keyword},'%') )
+
         </if>
     </select>
     <select id="login" resultType="com.mumu.zhkuconstructparty.biz.autoCode.pojo.User"
