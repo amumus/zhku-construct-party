@@ -54,7 +54,40 @@ public class UserController {
         return resultObject;
     }
 
-
+    @RequestMapping("/portal/user/addUser")
+    @ResponseBody
+    public ResultObject addUser(UserQueryVo vo){
+        ResultObject resultObject = ResultObject.failResult();
+        try {
+            Integer result = userService.addUser(vo);
+            if(result != 1){
+                resultObject.setMessage("插入失败，请重试");
+                resultObject.setStatus(ResultStatus.FAIL);
+            }
+        } catch (CommonException e) {
+            resultObject.setMessage("后台系统报错，请重试");
+            resultObject.setStatus(ResultStatus.FAIL);
+            e.printStackTrace();
+        }
+        return resultObject;
+    }
+    @RequestMapping("/portal/user/editUserBySelect")
+    @ResponseBody
+    public ResultObject editUserBySelect(UserQueryVo vo){
+        ResultObject resultObject = ResultObject.successResult();
+        try {
+            Integer result = userService.updateUser(vo);
+            if(result != 1){
+                resultObject.setMessage("插入失败，请重试");
+                resultObject.setStatus(ResultStatus.FAIL);
+            }
+        } catch (CommonException e) {
+            resultObject.setMessage("后台系统报错，请重试");
+            resultObject.setStatus(ResultStatus.FAIL);
+            e.printStackTrace();
+        }
+        return resultObject;
+    }
 
 
 }
