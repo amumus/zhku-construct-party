@@ -48,7 +48,7 @@ public class FtpUtil {
 	/**  
      * Description: 向FTP服务器上传文件  
      * @param host FTP服务器hostname  
-     * @param port FTP服务器端口  
+     * @param port FTP服务器端口
      * @param username FTP登录账号  
      * @param password FTP登录密码  
      * @param basePath FTP服务器基础目录 
@@ -66,7 +66,8 @@ public class FtpUtil {
             int reply;  
             ftp.connect(host, port);// 连接FTP服务器  
             // 如果采用默认端口，可以使用ftp.connect(host)的方式直接连接FTP服务器  
-            ftp.login(username, password);// 登录  
+            Boolean b = ftp.login(username, password);// 登录
+            System.out.println("b = "+b);
             reply = ftp.getReplyCode();  
             if (!FTPReply.isPositiveCompletion(reply)) {  
                 ftp.disconnect();  

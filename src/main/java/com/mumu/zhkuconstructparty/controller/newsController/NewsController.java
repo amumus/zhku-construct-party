@@ -1,17 +1,20 @@
 package com.mumu.zhkuconstructparty.controller.newsController;
 
+import com.mumu.zhkuconstructparty.biz.autoCode.pojo.NewsContent;
 import com.mumu.zhkuconstructparty.common.ResultObject;
 import com.mumu.zhkuconstructparty.service.NewsService;
 import com.mumu.zhkuconstructparty.vo.NewsVo.NewsQueryVo;
 import com.mumu.zhkuconstructparty.vo.NewsVo.NewsVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
-
+@CrossOrigin(origins = "*", maxAge = 3600)
 @Controller
 public class NewsController {
 
@@ -36,6 +39,17 @@ public class NewsController {
         NewsVo vo = newsService.getNews(id);
         ResultObject resultObject = ResultObject.successResult();
         resultObject.setData(vo);
+        return resultObject;
+    }
+    @RequestMapping("/portal/news/addNews")
+    @ResponseBody
+    public ResultObject addNews(NewsQueryVo vo){
+        ResultObject resultObject = ResultObject.successResult();
+        vo.setCreated(new Date());
+        Integer r = newsService.addNews(vo);
+        if(r != 1){
+            resultObject = ResultObject.failResult();
+        }
         return resultObject;
     }
 

@@ -56,4 +56,14 @@ public class NewsServiceImpl implements NewsService {
         newsVo.setNewsContent(newsContent);
         return newsVo;
     }
+
+    @Override
+    public Integer addNews(NewsQueryVo vo) {
+        myNewsMapper.insertInto(vo);
+        NewsContent newsContent = new NewsContent();
+        newsContent.setNewsId(vo.getId());
+        newsContent.setContent(vo.getContent());
+        Integer r = myNewsContentMapper.insert(newsContent);
+        return r;
+    }
 }

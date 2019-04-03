@@ -15,4 +15,6 @@ public interface MyNewsMapper {
     int updateNewsBySelect(News news);
 
     List<News> findByIds(List<Integer> list);
+
+    int insertInto(NewsQueryVo vo);
 }

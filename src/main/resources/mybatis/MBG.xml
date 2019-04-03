@@ -63,7 +63,7 @@
             <!--&lt;!&ndash;<generatedKey column="id" sqlStatement="Mysql" identity="true" />&ndash;&gt;-->
         <!--</table>-->
         <!--<table tableName="%"></table>-->
-        <table tableName="user_score_detail"></table>
+        <table tableName="news_content"></table>
         <!--<table tableName="score_task"></table>-->
         <!--<table tableName="user_score"></table>-->
         <!--<table tableName="user_score_detail"></table>-->

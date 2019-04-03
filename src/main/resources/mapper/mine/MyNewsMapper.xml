@@ -105,4 +105,15 @@
         </foreach>
     </select>
 
+    <insert id="insertInto" parameterType="com.mumu.zhkuconstructparty.vo.NewsVo.NewsQueryVo"
+            useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+           insert into news ( title, second_title,
+              image, author, created,
+              state)
+            values ( #{title,jdbcType=VARCHAR}, #{secondTitle,jdbcType=VARCHAR},
+              #{image,jdbcType=VARCHAR}, #{author,jdbcType=VARCHAR}, #{created,jdbcType=TIMESTAMP},
+              #{state,jdbcType=BIT})
+    </insert>
+
+
 </mapper>

@@ -10,4 +10,5 @@ public interface NewsService {
     Map getNewsList(NewsQueryVo vo);
 
     NewsVo getNews(Integer id);
+    Integer addNews(NewsQueryVo vo);
 }

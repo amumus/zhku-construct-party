@@ -8,5 +8,10 @@
         from `news_content`
         WHERE news_id = #{id}
     </select>
-
+    <insert id="insert" parameterType="com.mumu.zhkuconstructparty.biz.autoCode.pojo.NewsContent" >
+        insert into news_content (id, news_id, content
+        )
+        values (#{id,jdbcType=INTEGER}, #{newsId,jdbcType=INTEGER}, #{content,jdbcType=LONGVARCHAR}
+        )
+    </insert>
 </mapper>

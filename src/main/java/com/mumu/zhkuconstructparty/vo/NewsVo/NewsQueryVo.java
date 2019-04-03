@@ -9,6 +9,16 @@ public class NewsQueryVo extends News {
     String startTime;
     String endTime;
 
+    String content;
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
     public int getPageNum() {
         return pageNum;
     }
