@@ -13,6 +13,7 @@ import com.mumu.zhkuconstructparty.util.JsonUtils;
 import com.mumu.zhkuconstructparty.util.UploadUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -20,7 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 
 
-
+@CrossOrigin(origins = "*", maxAge = 3600)
 @Controller
 public class FTPController {
 	@Autowired
@@ -30,7 +31,7 @@ public class FTPController {
 	 * @param files
 	 * @return
 	 */
-	@RequestMapping("/uploadFiles")
+	@RequestMapping("/portal/uploadFiles")
 	@ResponseBody
 	public ResultObject uploadFiles(@RequestParam("file") MultipartFile[] files) {
 		List<String> imageURLs = new ArrayList<>();
@@ -63,7 +64,7 @@ public class FTPController {
 	 * @param file
 	 * @return
 	 */
-	@RequestMapping("/uploadImage")
+	@RequestMapping("/portal/uploadImage")
 	@ResponseBody
 	public String uploadImage(@RequestParam("file") MultipartFile file) {
 		String imageURL = "";
