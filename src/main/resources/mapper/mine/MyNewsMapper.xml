@@ -36,6 +36,9 @@
         <if test="state !=null and state !=''">
             and state = #{state}
         </if>
+        <if test="keyword !=null and keyword !=''">
+            and (author like  CONCAT('%',#{keyword},'%') or title like  CONCAT('%',#{keyword},'%'))
+        </if>
         ORDER BY created DESC
         limit #{pageStart},#{pageNum}
     </select>
@@ -70,10 +73,13 @@
         <if test="state !=null and state !=''">
             and state = #{state}
         </if>
+        <if test="keyword !=null and keyword !=''">
+            and (author like  CONCAT('%',#{keyword},'%') or title like  CONCAT('%',#{keyword},'%'))
+        </if>
     </select>
 
     <update id="updateNewsBySelect"  parameterType="com.mumu.zhkuconstructparty.biz.autoCode.pojo.News">
-        UPDATE `news` SET
+        UPDATE `news`
         <trim prefix="set" suffixOverrides=",">
             <if test="title != null and title != ''">
                 title = #{title} ,
@@ -88,9 +94,9 @@
                 created = #{created},
             </if>
             <if test="image !=null">
-                created = #{image},
+                image = #{image},
             </if>
-            <if test="state !=null and state !='">
+            <if test="state !=null and state !=''">
                 state = #{state},
             </if>
         </trim>

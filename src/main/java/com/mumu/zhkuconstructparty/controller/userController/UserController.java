@@ -78,7 +78,7 @@ public class UserController {
         try {
             Integer result = userService.updateUser(vo);
             if(result != 1){
-                resultObject.setMessage("插入失败，请重试");
+                resultObject.setMessage("更新失败，请重试");
                 resultObject.setStatus(ResultStatus.FAIL);
             }
         } catch (CommonException e) {

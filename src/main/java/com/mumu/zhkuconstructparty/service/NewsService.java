@@ -11,4 +11,6 @@ public interface NewsService {
 
     NewsVo getNews(Integer id);
     Integer addNews(NewsQueryVo vo);
+
+    Integer editNewsById(NewsQueryVo vo);
 }

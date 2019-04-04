@@ -66,4 +66,18 @@ public class NewsServiceImpl implements NewsService {
         Integer r = myNewsContentMapper.insert(newsContent);
         return r;
     }
+
+    @Override
+    public Integer editNewsById(NewsQueryVo vo) {
+        Integer updateNewsResult = myNewsMapper.updateNewsBySelect(vo);
+        if(updateNewsResult != 1){
+            return updateNewsResult;
+        }
+        NewsContent newsContent = new NewsContent();
+        newsContent.setId(vo.getNewsContentId());
+        newsContent.setNewsId(vo.getId());
+        newsContent.setContent(vo.getContent());
+        Integer updateNewsContentResult = newsContentMapper.updateByPrimaryKey(newsContent);
+        return updateNewsContentResult;
+    }
 }

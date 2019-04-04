@@ -9,7 +9,28 @@ public class NewsQueryVo extends News {
     String startTime;
     String endTime;
 
+    Integer newsContentId;
+
+    public Integer getNewsContentId() {
+        return newsContentId;
+    }
+
+    public void setNewsContentId(Integer newsContentId) {
+        this.newsContentId = newsContentId;
+    }
+
     String content;
+
+    String keyword;
+
+
+    public String getKeyword() {
+        return keyword;
+    }
+
+    public void setKeyword(String keyword) {
+        this.keyword = keyword;
+    }
 
     public String getContent() {
         return content;
