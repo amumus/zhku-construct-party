@@ -72,5 +72,15 @@ public class NewsController {
         resultObject.setData(result);
         return resultObject;
     }
-
+    @RequestMapping("/portal/news/getNews")
+    @ResponseBody
+    public ResultObject vueGetNews(Integer id){
+        if(id == null){
+            return ResultObject.successResult();
+        }
+        NewsVo vo = newsService.getNews(id);
+        ResultObject resultObject = ResultObject.successResult();
+        resultObject.setData(vo);
+        return resultObject;
+    }
 }

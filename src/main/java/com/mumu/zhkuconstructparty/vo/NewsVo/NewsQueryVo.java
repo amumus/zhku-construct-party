@@ -10,6 +10,9 @@ public class NewsQueryVo extends News {
     String endTime;
 
     Integer newsContentId;
+    String content;
+
+    String keyword;
 
     public Integer getNewsContentId() {
         return newsContentId;
@@ -18,12 +21,6 @@ public class NewsQueryVo extends News {
     public void setNewsContentId(Integer newsContentId) {
         this.newsContentId = newsContentId;
     }
-
-    String content;
-
-    String keyword;
-
-
     public String getKeyword() {
         return keyword;
     }
