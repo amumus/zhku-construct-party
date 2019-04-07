@@ -13,4 +13,6 @@ public interface NewsService {
     Integer addNews(NewsQueryVo vo);
 
     Integer editNewsById(NewsQueryVo vo);
+
+    Integer deleteNews(Integer id);
 }

@@ -11,10 +11,13 @@
             and id = #{id}
         </if>
         <if test="name !=null and name !=''">
-            and name like concat('%',#{name},'%')
+            and `name` like concat('%',#{name},'%')
         </if>
         <if test="author !=null and author !=''">
-            and name like concat('%',#{author},'%')
+            and author like concat('%',#{author},'%')
+        </if>
+        <if test="keyword !=null and keyword !=''">
+            and `name` like concat('%',#{keyword},'%') or author like concat('%',#{keyword},'%')
         </if>
         ORDER BY created DESC
         limit #{pageStart},#{pageNum}
@@ -42,5 +45,39 @@
             #{id}
         </foreach>
     </select>
-
+    <insert id="addVideo" parameterType="com.mumu.zhkuconstructparty.dto.VideoDto.VideoDto" >
+        insert into video (id, url, name,
+        img, author, created,
+        video_type, content)
+        values (#{id,jdbcType=INTEGER}, #{url,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
+        #{img,jdbcType=VARCHAR}, #{author,jdbcType=VARCHAR}, #{created,jdbcType=TIMESTAMP},
+        #{videoType,jdbcType=INTEGER}, #{content,jdbcType=LONGVARCHAR})
+    </insert>
+    <update id="editVideoById" parameterType="com.mumu.zhkuconstructparty.dto.VideoDto.VideoDto" >
+        update video
+        <trim prefix="set" suffixOverrides=",">
+            <if test="url != null and url != ''">
+                url = #{url} ,
+            </if>
+            <if test="name != null and url != ''" >
+                name = #{name} ,
+            </if>
+            <if test="img != null and img != ''">
+                img = #{img} ,
+            </if>
+            <if test="created != null and created != ''">
+                created = #{created},
+            </if>
+            <if test="author !=null and != ''">
+                author = #{author},
+            </if>
+            <if test="videoType !=null and videoType !=''">
+                video_type = #{videoType},
+            </if>
+            <if test="content !=null and content !=''">
+                content = #{content},
+            </if>
+        </trim>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
 </mapper>

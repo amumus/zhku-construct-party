@@ -14,4 +14,10 @@
         values (#{id,jdbcType=INTEGER}, #{newsId,jdbcType=INTEGER}, #{content,jdbcType=LONGVARCHAR}
         )
     </insert>
+
+
+    <delete id="deleteByNewsId" parameterType="java.lang.Integer" >
+        delete from news_content
+        where news_id = #{id,jdbcType=INTEGER}
+    </delete>
 </mapper>

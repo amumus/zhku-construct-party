@@ -6,7 +6,7 @@ import com.mumu.zhkuconstructparty.dto.ScoreDto.UserScoreDto;
 import java.util.Map;
 
 public interface ScoreService {
-    void addScore(Integer userId,Integer scoreId);
+    Map addScore(Integer userId,Integer scoreId);
 
     Map getScoreDetial(UserScoreDto userScoreDto);
 

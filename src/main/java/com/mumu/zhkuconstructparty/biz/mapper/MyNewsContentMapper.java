@@ -6,4 +6,6 @@ public interface MyNewsContentMapper {
     NewsContent findNewsContentByNewsId(Integer id);
 
     Integer insert(NewsContent newsContent);
+
+    Integer deleteByNewsId(Integer id);
 }

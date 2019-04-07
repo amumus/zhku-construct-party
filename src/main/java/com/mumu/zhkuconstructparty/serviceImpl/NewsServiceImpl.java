@@ -15,6 +15,7 @@ import com.mumu.zhkuconstructparty.vo.NewsVo.NewsVo;
 import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
@@ -56,7 +57,7 @@ public class NewsServiceImpl implements NewsService {
         newsVo.setNewsContent(newsContent);
         return newsVo;
     }
-
+    @Transactional
     @Override
     public Integer addNews(NewsQueryVo vo) {
         myNewsMapper.insertInto(vo);
@@ -66,7 +67,7 @@ public class NewsServiceImpl implements NewsService {
         Integer r = myNewsContentMapper.insert(newsContent);
         return r;
     }
-
+    @Transactional
     @Override
     public Integer editNewsById(NewsQueryVo vo) {
         Integer updateNewsResult = myNewsMapper.updateNewsBySelect(vo);
@@ -79,5 +80,11 @@ public class NewsServiceImpl implements NewsService {
         newsContent.setContent(vo.getContent());
         Integer updateNewsContentResult = newsContentMapper.updateByPrimaryKey(newsContent);
         return updateNewsContentResult;
+    }
+    @Transactional
+    @Override
+    public Integer deleteNews(Integer id) {
+        newsMapper.deleteByPrimaryKey(id);
+        return myNewsContentMapper.deleteByNewsId(id);
     }
 }

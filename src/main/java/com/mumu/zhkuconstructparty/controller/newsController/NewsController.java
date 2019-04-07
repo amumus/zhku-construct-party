@@ -74,13 +74,29 @@ public class NewsController {
     }
     @RequestMapping("/portal/news/getNews")
     @ResponseBody
-    public ResultObject vueGetNews(Integer id){
+    public ResultObject vueGetNews(@RequestBody Integer id){
         if(id == null){
             return ResultObject.successResult();
         }
         NewsVo vo = newsService.getNews(id);
         ResultObject resultObject = ResultObject.successResult();
         resultObject.setData(vo);
+        return resultObject;
+    }
+
+    @RequestMapping("/portal/news/batchDeleteNews")
+    @ResponseBody ResultObject batchDeleteNews(List<Integer> list){
+        ResultObject resultObject = ResultObject.successResult();
+//        videoDto.setCreated(new Date());
+        for(Integer id : list){
+            Integer result = newsService.deleteNews(id);
+        }
+        return resultObject;
+    }
+    @RequestMapping("/portal/news/deleteNews")
+    @ResponseBody ResultObject deleteNews(Integer id){
+        ResultObject resultObject = ResultObject.successResult();
+        Integer result = newsService.deleteNews(id);
         return resultObject;
     }
 }

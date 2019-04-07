@@ -6,6 +6,16 @@ public class VideoDto extends Video {
     int pageNum = 10;
     int pageStart = 0;
 
+    String keyword;
+
+    public String getKeyword() {
+        return keyword;
+    }
+
+    public void setKeyword(String keyword) {
+        this.keyword = keyword;
+    }
+
     public int getPageNum() {
         return pageNum;
     }

@@ -37,4 +37,11 @@ public class ScoreController {
         return resultObject;
     }
 
+    @RequestMapping("/uniApp/score/addUserScore")
+    @ResponseBody
+    public ResultObject addUserScore(Integer userId,Integer type){
+        ResultObject resultObject = ResultObject.successResult() ;
+        resultObject.setData(scoreService.addScore(userId,type));
+        return resultObject;
+    }
 }
