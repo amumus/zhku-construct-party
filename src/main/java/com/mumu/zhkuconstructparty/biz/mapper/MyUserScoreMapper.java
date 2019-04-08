@@ -10,4 +10,6 @@ public interface MyUserScoreMapper {
     int updateUserScoreByIdSelect(UserScore userScore);
 
     List<UserScoreDetail> getScoreDetial(UserScoreDto userScoreDto);
+
+    Integer getScoreDetialCount(UserScoreDto userScoreDto);
 }

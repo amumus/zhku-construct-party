@@ -69,31 +69,84 @@ public class ScoreServiceImpl implements ScoreService {
                break;
              //学习新闻满10分钟，积分加10分
             case ScoreTaskValue.STUDY_NEWS_TIME:
-                result = studyNewsTime(key,userScore,userScoreDetail);
+                result = studyNewsOnlineTime(key,userScore,userScoreDetail);
                 break;
             //学习视频满10分钟，积分加10分
             case ScoreTaskValue.STUDY_VIDEO_TIME:
-                result = studyNewsTime(key,userScore,userScoreDetail);
+                result = studyNewsOnlineTime(key,userScore,userScoreDetail);
                 break;
              //学习一篇文章，积分+2分
             case ScoreTaskValue.STUDY_NEWS:
-                ;
+                result = studyTimes(key, userScore, userScoreDetail);
                 break;
             //学习一个视频，积分+2分
             case ScoreTaskValue.STUDY_VIDEO:
-                ;
+                result = studyTimes(key, userScore, userScoreDetail);
                 break;
             //发布一条评论
             case ScoreTaskValue.PUBLISH_COMMENT:
-                myUserScoreMapper.updateUserScoreByIdSelect(userScore);
-                userScoreDetailMapper.insert(userScoreDetail);
+               result = publishComment(key,userScore,userScoreDetail);
                 break;
             default:
         }
         return result;
     }
 
-    private Map studyNewsTime(String key, UserScore userScore, UserScoreDetail userScoreDetail) {
+    private Map publishComment(String key, UserScore userScore, UserScoreDetail userScoreDetail) {
+        Map result = new HashMap();
+        String keyValue = jedisUtilService.getSTRINGS().get(key);
+        if(StringUtils.isEmpty(keyValue)){
+            jedisUtilService.getSTRINGS().setEx(key,3600*24,"1");
+            result.put("message","+2分，今日次数：1 / 6");
+            result.put("display","1");
+            myUserScoreMapper.updateUserScoreByIdSelect(userScore);
+            userScoreDetailMapper.insert(userScoreDetail);
+        }else{
+            if(Integer.parseInt(keyValue)>=5){
+                result.put("message","次数到达上限");
+                result.put("display","0");
+            }else{
+                jedisUtilService.getSTRINGS().setEx(key,3600*24,String.valueOf(Integer.parseInt(keyValue)+1));
+                result.put("message","+2分，今日次数："+String.valueOf(Integer.parseInt(keyValue)+1)+" / 6");
+                result.put("display","1");
+                myUserScoreMapper.updateUserScoreByIdSelect(userScore);
+                userScoreDetailMapper.insert(userScoreDetail);
+            }
+        }
+
+        myUserScoreMapper.updateUserScoreByIdSelect(userScore);
+        userScoreDetailMapper.insert(userScoreDetail);
+        return result;
+    }
+
+    private Map studyTimes(String key, UserScore userScore, UserScoreDetail userScoreDetail) {
+        Map result = new HashMap();
+        String keyValue = jedisUtilService.getSTRINGS().get(key);
+        //空代表第一次
+        if(StringUtils.isEmpty(keyValue)){
+            jedisUtilService.getSTRINGS().setEx(key,3600*24,"1");
+            result.put("message","+2分，今日次数：1 / 6");
+            result.put("display","1");
+            myUserScoreMapper.updateUserScoreByIdSelect(userScore);
+            userScoreDetailMapper.insert(userScoreDetail);
+        }else{
+            //每天限制加五次
+            if(Integer.parseInt(keyValue)>= 5){
+                result.put("message","次数到达上限");
+                result.put("display","0");
+            }else{
+                jedisUtilService.getSTRINGS().setEx(key,3600*24,String.valueOf(Integer.parseInt(keyValue)+1));
+                result.put("message","+2分，今日次数："+String.valueOf(Integer.parseInt(keyValue)+1)+" / 6");
+                result.put("display","1");
+                myUserScoreMapper.updateUserScoreByIdSelect(userScore);
+                userScoreDetailMapper.insert(userScoreDetail);
+            }
+        }
+
+        return result;
+    }
+
+    private Map studyNewsOnlineTime(String key, UserScore userScore, UserScoreDetail userScoreDetail) {
         Map result = new HashMap();
         String flag = key+"flag";
         String done = key+"done";
@@ -106,17 +159,19 @@ public class ScoreServiceImpl implements ScoreService {
             if(StringUtils.isEmpty(keyValue)){
                 jedisUtilService.getSTRINGS().setEx(key,3600*24,String.valueOf(System.currentTimeMillis() / 1000));
                 jedisUtilService.getSTRINGS().setEx(flag,3600*24,"1");
-                result.put("message","+10分，今日次数：1 / 6");
+                result.put("message","+2分，今日次数：1 / 6");
                 result.put("display","1");
+               myUserScoreMapper.updateUserScoreByIdSelect(userScore);
+                userScoreDetailMapper.insert(userScoreDetail);
             }else{
                 //检查时间差，单位秒
                 long currentTime = System.currentTimeMillis() / 1000;
                 long oldTime = Long.valueOf(jedisUtilService.getSTRINGS().get(key));
                 long timeDifference = currentTime - oldTime ;
                 //如果时间差在4.5分钟，说明是正常访问，执行加分或者添加累计时间，时间差小于4.5分钟说明是恶意刷分
-                if(timeDifference > 270L) {
+                if(timeDifference > 110L) {
                     String s = String.valueOf(Integer.parseInt(flagValue)+1);
-                    //已经三十分钟,五分钟请求一次,加积分
+                    //已经十二分钟,2分钟请求一次,加积分
                     if(Integer.parseInt(s) >= 6){
                         jedisUtilService.getSTRINGS().setEx(done,3600*24,"1");
                     }
@@ -124,12 +179,13 @@ public class ScoreServiceImpl implements ScoreService {
                     jedisUtilService.getSTRINGS().setEx(flag,3600*24,s);
                     result.put("message","+10分，今日次数："+s+" / 6");
                     result.put("display","1");
+                   myUserScoreMapper.updateUserScoreByIdSelect(userScore);
+                    userScoreDetailMapper.insert(userScoreDetail);
                 }else{//判定为刷分情节
                     result.put("message","刷分");
                     result.put("display","0");
                 }
             }
-
         }else{ //已加满分
             result.put("message","已加满分");
             result.put("display","0");
@@ -161,6 +217,7 @@ public class ScoreServiceImpl implements ScoreService {
         Map result = new HashMap();
         List<UserScoreDetail> userScoreList= myUserScoreMapper.getScoreDetial(userScoreDto);
         result.put("list",userScoreList);
+        result.put("count",myUserScoreMapper.getScoreDetialCount(userScoreDto));
         return result;
     }
 

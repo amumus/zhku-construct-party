@@ -16,4 +16,8 @@
         ORDER BY occur_time DESC
         limit #{pageStart},#{pageNum}
     </select>
+    <select id="getScoreDetialCount" parameterType="com.mumu.zhkuconstructparty.dto.ScoreDto.UserScoreDto" resultType="java.lang.Integer">
+        select count(*) from user_score_detail
+        WHERE user_id = #{userId}
+    </select>
 </mapper>
