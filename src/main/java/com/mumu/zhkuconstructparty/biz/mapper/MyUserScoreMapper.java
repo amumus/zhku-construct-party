@@ -12,4 +12,6 @@ public interface MyUserScoreMapper {
     List<UserScoreDetail> getScoreDetial(UserScoreDto userScoreDto);
 
     Integer getScoreDetialCount(UserScoreDto userScoreDto);
+
+    Integer getUserRankByPrimaryKey(Integer userId);
 }

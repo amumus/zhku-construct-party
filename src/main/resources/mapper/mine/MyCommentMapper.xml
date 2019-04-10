@@ -42,7 +42,7 @@
         ORDER BY created DESC
         limit #{pageStart},#{pageNum}
     </select>
-    <select id="getMyCommentListCount" resultType="com.mumu.zhkuconstructparty.biz.autoCode.pojo.Comment"
+    <select id="getMyCommentListCount" resultType="java.lang.Integer"
             parameterType="com.mumu.zhkuconstructparty.dto.CommentDto.CommentDto">
         SELECT COUNT(*) FROM `comment`
         WHERE 1=1

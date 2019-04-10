@@ -36,6 +36,13 @@ public class ScoreController {
         resultObject.setData(scoreService.getUserScoreById(userId));
         return resultObject;
     }
+    @RequestMapping("/uniApp/score/getUserRank")
+    @ResponseBody
+    public ResultObject getUserRank(Integer userId){
+        ResultObject resultObject = ResultObject.successResult() ;
+        resultObject.setData(scoreService.getUserRank(userId));
+        return resultObject;
+    }
 
     @RequestMapping("/uniApp/score/addUserScore")
     @ResponseBody
@@ -44,4 +51,5 @@ public class ScoreController {
         resultObject.setData(scoreService.addScore(userId,type));
         return resultObject;
     }
+
 }

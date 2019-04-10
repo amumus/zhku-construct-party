@@ -20,4 +20,12 @@
         select count(*) from user_score_detail
         WHERE user_id = #{userId}
     </select>
+    <select id="getUserRankByPrimaryKey" resultType="java.lang.Integer">
+               SELECT b.rank FROM
+        (
+        SELECT t.*, @rank := @rank + 1 AS rank
+        FROM (SELECT @rank := 0) r,
+        (SELECT USER_ID FROM user_score ORDER BY SCORE desc, USER_ID desc) AS t
+        ) AS b WHERE b.user_id =#{userId};
+    </select>
 </mapper>

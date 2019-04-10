@@ -13,4 +13,5 @@ public interface UserScoreMapper {
     List<UserScore> selectAll();
 
     int updateByPrimaryKey(UserScore record);
+
 }

@@ -225,4 +225,9 @@ public class ScoreServiceImpl implements ScoreService {
     public UserScore getUserScoreById(Integer userId) {
         return userScoreMapper.selectByPrimaryKey(userId);
     }
+
+    @Override
+    public Integer getUserRank(Integer userId) {
+        return myUserScoreMapper.getUserRankByPrimaryKey(userId);
+    }
 }
