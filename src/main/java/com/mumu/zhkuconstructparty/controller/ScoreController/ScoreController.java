@@ -51,5 +51,14 @@ public class ScoreController {
         resultObject.setData(scoreService.addScore(userId,type));
         return resultObject;
     }
+    @RequestMapping("/uniApp/score/addUserScore")
+    @ResponseBody
+    public ResultObject getUserScoreReport(Integer userId){
+        ResultObject resultObject = ResultObject.successResult() ;
+        Map map = scoreService.getUserScoreReport(userId);
+        resultObject.setData(map);
+        return resultObject;
+    }
+
 
 }

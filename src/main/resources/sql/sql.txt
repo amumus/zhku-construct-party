@@ -1,2 +1,5 @@
-select sum(integral_score) from user_score_detail where score_id = 1 and user_id =1;
-
+SELECT score_id,SUM(integral_score) FROM 
+(
+SELECT integral_score,score_id FROM user_score_detail WHERE user_id =1
+) AS a
+ GROUP BY score_id

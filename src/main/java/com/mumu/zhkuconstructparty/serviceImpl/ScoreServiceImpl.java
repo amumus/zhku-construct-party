@@ -230,4 +230,11 @@ public class ScoreServiceImpl implements ScoreService {
     public Integer getUserRank(Integer userId) {
         return myUserScoreMapper.getUserRankByPrimaryKey(userId);
     }
+
+    @Override
+    public Map getUserScoreReport(Integer userId) {
+//        Map map =
+
+        return null;
+    }
 }
