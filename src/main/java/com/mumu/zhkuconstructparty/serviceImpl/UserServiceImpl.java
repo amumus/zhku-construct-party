@@ -1,7 +1,9 @@
 package com.mumu.zhkuconstructparty.serviceImpl;
 
 import com.mumu.zhkuconstructparty.biz.autoCode.mapper.UserMapper;
+import com.mumu.zhkuconstructparty.biz.autoCode.mapper.UserScoreMapper;
 import com.mumu.zhkuconstructparty.biz.autoCode.pojo.User;
+import com.mumu.zhkuconstructparty.biz.autoCode.pojo.UserScore;
 import com.mumu.zhkuconstructparty.biz.mapper.MyUserMapper;
 import com.mumu.zhkuconstructparty.common.CommonException;
 import com.mumu.zhkuconstructparty.service.UserService;
@@ -9,6 +11,7 @@ import com.mumu.zhkuconstructparty.vo.UserVo.UserQueryVo;
 import com.mumu.zhkuconstructparty.vo.UserVo.UserVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
 import java.util.List;
@@ -21,6 +24,8 @@ public class UserServiceImpl implements UserService{
     MyUserMapper myUserMapper;
     @Autowired
     UserMapper userMapper;
+    @Autowired
+    UserScoreMapper userScoreMapper;
 
     @Override
     public Map listUser(UserQueryVo vo) {
@@ -34,9 +39,15 @@ public class UserServiceImpl implements UserService{
         return map;
     }
 
+    @Transactional
     @Override
     public Integer addUser(UserQueryVo vo) {
-        return userMapper.insert(vo);
+        Integer id = myUserMapper.insert(vo);
+        UserScore userScore = new UserScore();
+        userScore.setName(vo.getName());
+        userScore.setUserId(id);
+        userScore.setScore(0);
+        return userScoreMapper.insert(userScore);
     }
 
     @Override
@@ -46,7 +57,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public Integer deleteByIdentityCode(UserQueryVo vo) throws CommonException {
-        return null;
+        return myUserMapper.deleteByIdentityCode(vo.getId());
     }
 
     @Override

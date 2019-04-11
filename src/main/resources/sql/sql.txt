@@ -1,0 +1,2 @@
+select sum(integral_score) from user_score_detail where score_id = 1 and user_id =1;
+

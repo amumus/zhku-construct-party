@@ -11,7 +11,9 @@ public interface MyUserMapper {
     int updateUserBySelect(UserQueryVo user);
 
     int countListUsers(UserQueryVo vo);
-    int deleteByIdentityCode();
+    int deleteByIdentityCode(Integer id);
 
     List<User> findByIds(List<Integer> list);
+
+    Integer insert(User record);
 }

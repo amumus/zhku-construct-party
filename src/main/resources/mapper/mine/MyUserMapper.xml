@@ -110,4 +110,20 @@
             #{id}
         </foreach>
     </select>
+    <insert id="insert" parameterType="com.mumu.zhkuconstructparty.biz.autoCode.pojo.User" useGeneratedKeys="true" keyProperty="id">
+        insert into user (id, identity_code, password,
+        email, name, user_name,
+        phone, political_status, head_img,
+        college, major, validata_code,
+        outDate)
+        values (#{id,jdbcType=INTEGER}, #{identityCode,jdbcType=VARCHAR}, #{password,jdbcType=CHAR},
+        #{email,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR},
+        #{phone,jdbcType=VARCHAR}, #{politicalStatus,jdbcType=VARCHAR}, #{headImg,jdbcType=VARCHAR},
+        #{college,jdbcType=VARCHAR}, #{major,jdbcType=VARCHAR}, #{validataCode,jdbcType=CHAR},
+        #{outdate,jdbcType=TIMESTAMP})
+    </insert>
+    <delete id="deleteByIdentityCode" parameterType="java.lang.Integer" >
+        delete from user
+        where identity_code = #{id,jdbcType=INTEGER}
+    </delete>
 </mapper>
