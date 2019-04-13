@@ -5,7 +5,8 @@ SELECT integral_score,score_id FROM user_score_detail WHERE user_id =1
 ) AS a
  GROUP BY score_id
 2.获取某个用户每月的总分，uniapp用
- select a.`month`,sum(integral_score) as `score` from (SELECT * , MONTH(occur_time) as `month` FROM user_score_detail WHERE user_id =1)as a GROUP BY a.`month`
+ select a.`month`,sum(integral_score) as `score` from
+ (SELECT * , MONTH(occur_time) as `month` FROM user_score_detail WHERE user_id =1)as a GROUP BY a.`month`
 
 3.获取某个专业、学院的学生list
  select id from `user` where college = (select `name` from college where id = 1 )

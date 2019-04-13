@@ -74,7 +74,7 @@ public class NewsController {
     }
     @RequestMapping("/portal/news/getNews")
     @ResponseBody
-    public ResultObject vueGetNews(@RequestBody Integer id){
+    public ResultObject vueGetNews(Integer id){
         if(id == null){
             return ResultObject.successResult();
         }
