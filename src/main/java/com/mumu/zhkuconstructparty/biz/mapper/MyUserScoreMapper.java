@@ -5,6 +5,7 @@ import com.mumu.zhkuconstructparty.biz.autoCode.pojo.UserScoreDetail;
 import com.mumu.zhkuconstructparty.dto.ScoreDto.UserScoreDto;
 
 import java.util.List;
+import java.util.Map;
 
 public interface MyUserScoreMapper {
     int updateUserScoreByIdSelect(UserScore userScore);
@@ -14,4 +15,8 @@ public interface MyUserScoreMapper {
     Integer getScoreDetialCount(UserScoreDto userScoreDto);
 
     Integer getUserRankByPrimaryKey(Integer userId);
+
+    List<Map> getTypeList(Integer userId);
+
+    List<Map> getMonthList(Integer userId);
 }

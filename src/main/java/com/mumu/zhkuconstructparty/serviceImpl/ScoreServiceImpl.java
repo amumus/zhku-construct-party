@@ -232,9 +232,17 @@ public class ScoreServiceImpl implements ScoreService {
     }
 
     @Override
-    public Map getUserScoreReport(Integer userId) {
-//        Map map =
+    public Map  getUserScoreReport(Integer userId) {
+        Map map = new HashMap();
+        List<Map> monthList = myUserScoreMapper.getMonthList(userId);
+        
 
-        return null;
+
+
+        List<Map> typeList = myUserScoreMapper.getTypeList(userId);
+
+        map.put("monthList",monthList);
+        map.put("typeList",typeList);
+        return map;
     }
 }

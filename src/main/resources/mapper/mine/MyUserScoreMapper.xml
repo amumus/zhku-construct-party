@@ -21,11 +21,21 @@
         WHERE user_id = #{userId}
     </select>
     <select id="getUserRankByPrimaryKey" resultType="java.lang.Integer">
-               SELECT b.rank FROM
+        SELECT b.rank FROM
         (
         SELECT t.*, @rank := @rank + 1 AS rank
         FROM (SELECT @rank := 0) r,
         (SELECT USER_ID FROM user_score ORDER BY SCORE desc, USER_ID desc) AS t
         ) AS b WHERE b.user_id =#{userId};
+    </select>
+    <select id="getTypeList" resultType="java.util.Map" parameterType="java.lang.Integer">
+        SELECT score_id,SUM(integral_score) as score FROM
+        (
+        SELECT integral_score,score_id FROM user_score_detail WHERE user_id =#{userId}
+        ) AS a  GROUP BY score_id
+    </select>
+    <select id="getMonthList" resultType="java.util.Map" parameterType="java.lang.Integer">
+         select a.`month`,sum(integral_score) as `score` from
+         (SELECT * , MONTH(occur_time) as `month` FROM user_score_detail WHERE user_id =1)as a GROUP BY a.`month`
     </select>
 </mapper>
