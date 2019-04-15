@@ -55,6 +55,14 @@ public class CommentController {
         return  resultObject;
     }
 
+    @RequestMapping("/uniApp/comment/getCommontById")
+    @ResponseBody
+    public ResultObject getCommontById(Integer id){
+        ResultObject resultObject = ResultObject.successResult();
+        Map map = commentService.getCommontById(id);
+        resultObject.setData(map);
+        return  resultObject;
+    }
 
 
 

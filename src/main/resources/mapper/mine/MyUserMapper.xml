@@ -126,4 +126,12 @@
         delete from user
         where identity_code = #{id,jdbcType=INTEGER}
     </delete>
+
+    <select id="getUserListByIds" parameterType="com.mumu.zhkuconstructparty.biz.autoCode.pojo.User"
+    resultType="com.mumu.zhkuconstructparty.biz.autoCode.pojo.User">
+        select * from user WHERE id IN
+        <foreach collection="list" item="id" index="index" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </select>
 </mapper>

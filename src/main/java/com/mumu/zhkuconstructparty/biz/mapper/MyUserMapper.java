@@ -16,4 +16,6 @@ public interface MyUserMapper {
     List<User> findByIds(List<Integer> list);
 
     Integer insert(User record);
+
+    List<User> getUserListByIds(List<Integer> list);
 }

@@ -5,6 +5,16 @@ import com.mumu.zhkuconstructparty.biz.autoCode.pojo.Comment;
 public class CommentVo extends Comment {
     String userName ;
     String userImage;
+    String parentUserName;
+
+    public String getParentUserName() {
+        return parentUserName;
+    }
+
+    public void setParentUserName(String parentUserName) {
+        this.parentUserName = parentUserName;
+    }
+
     String publishDate;
 
     //回复对象的名称

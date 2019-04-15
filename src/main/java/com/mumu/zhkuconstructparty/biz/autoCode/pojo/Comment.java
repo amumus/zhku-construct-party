@@ -1,5 +1,7 @@
 package com.mumu.zhkuconstructparty.biz.autoCode.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -11,7 +13,7 @@ public class Comment implements Serializable {
     private Integer targetId;
 
     private Integer parentId;
-
+    @JsonFormat(pattern="yyyy-MM-dd hh:mm:ss",timezone = "GMT+8")
     private Date created;
 
     private Integer rootId;

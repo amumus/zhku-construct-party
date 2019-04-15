@@ -1,5 +1,7 @@
 package com.mumu.zhkuconstructparty.biz.autoCode.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -13,7 +15,7 @@ public class Video implements Serializable {
     private String img;
 
     private String author;
-
+    @JsonFormat(pattern="yyyy-MM-dd hh:mm:ss",timezone = "GMT+8")
     private Date created;
 
     private Integer videoType;

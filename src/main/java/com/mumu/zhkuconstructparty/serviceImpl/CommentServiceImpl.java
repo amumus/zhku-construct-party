@@ -1,6 +1,8 @@
 package com.mumu.zhkuconstructparty.serviceImpl;
 
 import com.mumu.zhkuconstructparty.biz.autoCode.mapper.CommentMapper;
+import com.mumu.zhkuconstructparty.biz.autoCode.mapper.NewsMapper;
+import com.mumu.zhkuconstructparty.biz.autoCode.mapper.VideoMapper;
 import com.mumu.zhkuconstructparty.biz.autoCode.pojo.Comment;
 import com.mumu.zhkuconstructparty.biz.autoCode.pojo.News;
 import com.mumu.zhkuconstructparty.biz.autoCode.pojo.User;
@@ -37,8 +39,10 @@ public class CommentServiceImpl implements CommentService {
     MyNewsMapper myNewsMapper;
     @Autowired
     MyVideoMapper myVideoMapper;
-
-
+    @Autowired
+    NewsMapper newsMapper;
+    @Autowired
+    VideoMapper videoMapper;
 
     CommentHelper helper = new CommentHelper();
 
@@ -153,11 +157,57 @@ public class CommentServiceImpl implements CommentService {
             resultList.add(vo);
         }
 
-
-
         result.put("list",resultList);
         Integer count = myCommentMapper.getMyCommentListCount(commentDto);
         result.put("count",count);
+        return result;
+    }
+
+    @Override
+    public Map getCommontById(Integer id) {
+        Comment comment = commentMapper.selectByPrimaryKey(id);
+        Map contentMap = new HashMap();
+        if(comment.getType() == 1){
+            News news = newsMapper.selectByPrimaryKey(comment.getTargetId());
+            contentMap.put("id",news.getId());
+            contentMap.put("image",news.getImage());
+            contentMap.put("type",1);
+            contentMap.put("title",news.getTitle());
+            contentMap.put("author",news.getAuthor());
+        }else{
+            Video video = videoMapper.selectByPrimaryKey(comment.getTargetId());
+            contentMap.put("id",video.getId());
+            contentMap.put("image",video.getImg());
+            contentMap.put("type",2);
+            contentMap.put("title",video.getName());
+            contentMap.put("author",video.getAuthor());
+        }
+        List<CommentVo> commentVoList = myCommentMapper.selectByRootId(id);
+
+        List<Integer> userIdList = new ArrayList<>();
+        userIdList.add(comment.getUserId());
+        Map<Integer,CommentVo> commentVoMap = new HashMap<>();
+        for(CommentVo vo : commentVoList){
+            userIdList.add(vo.getUserId());
+            commentVoMap.put(vo.getId(),vo);
+        }
+        List<User> userList = myUserMapper.getUserListByIds(userIdList);
+        Map<Integer,User> userMap = new HashMap();
+        for(User u:userList){
+            userMap.put(u.getId(),u);
+        }
+        for(CommentVo vo :commentVoList){
+            User user = userMap.get(vo.getUserId());
+            User parentUser = userMap.get(vo.getParentUserId());
+            vo.setUserName(user.getName());
+            vo.setParentUserId(parentUser.getId());
+            vo.setParentUserName(parentUser.getUserName());
+        }
+        Map result = new HashMap();
+        result.put("comment",comment);
+        result.put("user",userMap.get(comment.getUserId()));
+        result.put("contentMap",contentMap);
+        result.put("list",commentVoList);
         return result;
     }
 }

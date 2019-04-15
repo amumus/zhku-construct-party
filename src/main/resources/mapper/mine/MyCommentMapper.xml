@@ -61,5 +61,9 @@
         AND `USER_ID` = #{userId}
     </select>
 
+    <select id="selectByRootId" resultType="com.mumu.zhkuconstructparty.vo.CommentVo.CommentVo"
+            parameterType="java.lang.Integer">
+        select * from comment where root_id = #{id} ORDER BY CREATED
+    </select>
 
 </mapper>

@@ -11,4 +11,6 @@ public interface CommentService {
     Map addComment(CommentDto commentDto) throws CommonException;
 
     Map getMyCommentList(CommentDto commentDto);
+
+    Map getCommontById(Integer id);
 }
