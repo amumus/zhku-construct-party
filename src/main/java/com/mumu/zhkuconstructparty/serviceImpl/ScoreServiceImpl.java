@@ -16,6 +16,7 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -235,13 +236,44 @@ public class ScoreServiceImpl implements ScoreService {
     public Map  getUserScoreReport(Integer userId) {
         Map map = new HashMap();
         List<Map> monthList = myUserScoreMapper.getMonthList(userId);
-        
+        Map<Integer,Double> monthMap = new HashMap();
+        for(Map m :monthList){
+            monthMap.put((Integer) m.get("month"),((BigDecimal)m.get("score")).doubleValue());
+        }
+        double[] monthListArr = new double[12];
+        for (int i = 0 ; i < 12 ; i ++){
+            if(monthMap.get(i) != null){
+                monthListArr[i] = monthMap.get(i);
+            }
+        }
+       List<Map> typeList = myUserScoreMapper.getTypeList(userId);
+//        Map typeMap = new HashMap();
+        for(Map m : typeList){
+            int score_id = (int) m.get("score_id");
+            m.put("value",m.get("score"));
+            switch (score_id){
+                case 1:
+                    m.put("name","登录积分");
+                    break;
+                case 2:
+                    m.put("name","学习文章时长");
+                    break;
+                case 3:
+                    m.put("name","学习视频时长");
+                    break;
+                case 4:
+                    m.put("name","文章数积分");
+                    break;
+                case 5:
+                    m.put("name","视频数积分");
+                    break;
+                case 6:
+                    m.put("name","评论积分");
+            }
+        }
 
 
-
-        List<Map> typeList = myUserScoreMapper.getTypeList(userId);
-
-        map.put("monthList",monthList);
+        map.put("monthList",monthListArr);
         map.put("typeList",typeList);
         return map;
     }
