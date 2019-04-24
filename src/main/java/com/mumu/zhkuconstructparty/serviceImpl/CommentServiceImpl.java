@@ -165,6 +165,7 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public Map getCommontById(Integer id) {
+        Map result = new HashMap();
         Comment comment = commentMapper.selectByPrimaryKey(id);
         Map contentMap = new HashMap();
         if(comment.getType() == 1){
@@ -174,6 +175,8 @@ public class CommentServiceImpl implements CommentService {
             contentMap.put("type",1);
             contentMap.put("title",news.getTitle());
             contentMap.put("author",news.getAuthor());
+            contentMap.put("created",news.getCreated());
+            result.put("contentMap",news);
         }else{
             Video video = videoMapper.selectByPrimaryKey(comment.getTargetId());
             contentMap.put("id",video.getId());
@@ -181,6 +184,7 @@ public class CommentServiceImpl implements CommentService {
             contentMap.put("type",2);
             contentMap.put("title",video.getName());
             contentMap.put("author",video.getAuthor());
+            result.put("contentMap",video);
         }
         List<CommentVo> commentVoList = myCommentMapper.selectByRootId(id);
 
@@ -203,10 +207,10 @@ public class CommentServiceImpl implements CommentService {
             vo.setParentUserId(parentUser.getId());
             vo.setParentUserName(parentUser.getUserName());
         }
-        Map result = new HashMap();
+
         result.put("comment",comment);
         result.put("user",userMap.get(comment.getUserId()));
-        result.put("contentMap",contentMap);
+
         result.put("list",commentVoList);
         return result;
     }
