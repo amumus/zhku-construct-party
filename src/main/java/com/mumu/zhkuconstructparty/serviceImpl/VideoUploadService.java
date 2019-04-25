@@ -40,7 +40,7 @@ public class VideoUploadService {
         System.out.println(localFile.getName());
         // 指定要上传到 COS 上对象键
 //        String key = "video/1.jpg";
-        String key = (new Date()).getTime() +localFile.getName();
+        String key = "/video/"+(new Date()).getTime() +localFile.getName();
         PutObjectRequest putObjectRequest = new PutObjectRequest(bucketName, key, localFile);
         PutObjectResult putObjectResult = cosClient.putObject(putObjectRequest);
         String etag = putObjectResult.getETag();
@@ -53,7 +53,7 @@ public class VideoUploadService {
 
     public static void main(String[] args) {
         VideoUploadService videoUploadService = new VideoUploadService();
-       String s= videoUploadService.upload( new File("C:\\Users\\mumu\\Videos\\test2.mp4"));
+       String s= videoUploadService.upload( new File("C:\\Users\\Administrator\\Videos\\test.mp4"));
         System.out.println(s);
         // 1 初始化用户身份信息（secretId, secretKey）。
 //        COSCredentials cred = new BasicCOSCredentials(SecretId, SecretKey);
