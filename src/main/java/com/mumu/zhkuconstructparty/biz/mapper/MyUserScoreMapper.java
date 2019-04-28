@@ -19,4 +19,8 @@ public interface MyUserScoreMapper {
     List<Map> getTypeList(Integer userId);
 
     List<Map> getMonthList(Integer userId);
+
+    List<Map> getUserScoreList(UserScoreDto userScoreDto);
+
+    Integer getUserScoreListCount(UserScoreDto userScoreDto);
 }

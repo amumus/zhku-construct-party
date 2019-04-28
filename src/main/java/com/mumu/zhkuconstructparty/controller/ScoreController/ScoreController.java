@@ -60,5 +60,15 @@ public class ScoreController {
         return resultObject;
     }
 
+    @RequestMapping("/portal/score/getUserScoreList")
+    @ResponseBody
+    public ResultObject getUserScoreList(UserScoreDto userScoreDto){
+        ResultObject resultObject = ResultObject.successResult();
+        userScoreDto.setPageStart(userScoreDto.getPageNum()*userScoreDto.getPageStart());
+        Map result = scoreService.getUserScoreList(userScoreDto);
+        resultObject.setData(result);
+        return resultObject;
+    }
+
 
 }

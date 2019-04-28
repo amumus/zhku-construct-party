@@ -277,4 +277,14 @@ public class ScoreServiceImpl implements ScoreService {
         map.put("typeList",typeList);
         return map;
     }
+
+    @Override
+    public Map getUserScoreList(UserScoreDto userScoreDto) {
+        Map result = new HashMap();
+        List<Map> userScoreList = myUserScoreMapper.getUserScoreList(userScoreDto);
+        result.put("list",userScoreList);
+        Integer count = myUserScoreMapper.getUserScoreListCount(userScoreDto);
+        result.put("count",count);
+        return result;
+    }
 }

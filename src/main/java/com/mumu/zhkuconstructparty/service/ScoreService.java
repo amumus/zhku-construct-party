@@ -15,4 +15,6 @@ public interface ScoreService {
     Object getUserRank(Integer userId);
 
     Map getUserScoreReport(Integer userId);
+
+    Map getUserScoreList(UserScoreDto userScoreDto);
 }

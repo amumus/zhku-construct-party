@@ -38,4 +38,36 @@
          select a.`month`,sum(integral_score) as `score` from
          (SELECT * , MONTH(occur_time) as `month` FROM user_score_detail WHERE user_id =1)as a GROUP BY a.`month`
     </select>
+    <select id="getUserScoreList" parameterType="com.mumu.zhkuconstructparty.dto.ScoreDto.UserScoreDto" resultType="java.util.Map">
+        select `user`.*,`user_score`.score from `user`,`user_score` where `user`.id = user_score.user_id
+        <if test="keyword != null and keyword != ''">
+            and ( `user`.`identity_code` like concat('%',#{keyword},'%') or `user`.`name` like concat('%',#{keyword},'%') or `user`.`user_name` like concat('%',#{keyword},'%'))
+        </if>
+        <if test="college != null and college !=''">
+            and college = #{college}
+        </if>
+        <if test="major != null and major !=''">
+            and major = #{major}
+        </if>
+        <if test="sort != null and sort == 1">
+            order by score DESC
+        </if>
+        <if test="sort != null and sort == 0">
+            order by score
+        </if>
+        limit #{pageStart},#{pageNum}
+    </select>
+    <select id="getUserScoreListCount" parameterType="com.mumu.zhkuconstructparty.dto.ScoreDto.UserScoreDto" resultType="java.lang.Integer">
+        select count(id) from `user`,`user_score` where `user`.id = user_score.user_id
+        <if test="keyword != null and keyword != ''">
+            and ( `user`.`identity_code` like concat('%',#{keyword},'%') or `user`.`name` like concat('%',#{keyword},'%') or `user`.`user_name` like concat('%',#{keyword},'%'))
+        </if>
+        <if test="college != null and college !=''">
+            and college = #{college}
+        </if>
+        <if test="major != null and major !=''">
+            and major = #{major}
+        </if>
+    </select>
+
 </mapper>
