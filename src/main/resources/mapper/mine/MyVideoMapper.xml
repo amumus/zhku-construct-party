@@ -19,6 +19,9 @@
         <if test="keyword !=null and keyword !=''">
             and `name` like concat('%',#{keyword},'%') or author like concat('%',#{keyword},'%')
         </if>
+        <if test="videoType !=null and videoType !=''">
+            and video_type = #{videoType}
+        </if>
         ORDER BY created DESC
         limit #{pageStart},#{pageNum}
     </select>
@@ -35,6 +38,9 @@
         </if>
         <if test="author !=null and author !=''">
             and name like concat('%',#{author},'%')
+        </if>
+        <if test="videoType !=null and videoType !=''">
+            and video_type = #{videoType}
         </if>
     </select>
 

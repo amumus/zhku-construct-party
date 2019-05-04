@@ -48,7 +48,7 @@ public class VideoServiceImpl implements VideoService {
     public String uploadVideo(MultipartFile file) {
         File f = null;
         try {
-            f=File.createTempFile(file.getOriginalFilename(), ".mp4");
+            f=File.createTempFile("temp", ".mp4");
             file.transferTo(f);
             f.deleteOnExit();
             return videoUploadService.upload( f );

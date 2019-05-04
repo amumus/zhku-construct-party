@@ -48,7 +48,7 @@ public class VideoUploadService {
         // 关闭客户端(关闭后台线程)
         cosClient.shutdown();
 
-        return "http://construct-party-1256364044.cos.ap-guangzhou.myqcloud.com/"+key;
+        return "http://construct-party-1256364044.cos.ap-guangzhou.myqcloud.com"+key;
     }
 
     public static void main(String[] args) {
