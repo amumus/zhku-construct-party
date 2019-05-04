@@ -242,8 +242,8 @@ public class ScoreServiceImpl implements ScoreService {
         }
         double[] monthListArr = new double[12];
         for (int i = 0 ; i < 12 ; i ++){
-            if(monthMap.get(i) != null){
-                monthListArr[i] = monthMap.get(i);
+            if(monthMap.get(i+1) != null){
+                monthListArr[i] = monthMap.get(i+1);
             }
         }
        List<Map> typeList = myUserScoreMapper.getTypeList(userId);

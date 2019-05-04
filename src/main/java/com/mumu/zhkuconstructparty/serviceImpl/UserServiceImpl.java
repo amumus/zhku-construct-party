@@ -42,10 +42,10 @@ public class UserServiceImpl implements UserService{
     @Transactional
     @Override
     public Integer addUser(UserQueryVo vo) {
-        Integer id = myUserMapper.insert(vo);
+        myUserMapper.insert(vo);
         UserScore userScore = new UserScore();
         userScore.setName(vo.getName());
-        userScore.setUserId(id);
+        userScore.setUserId(vo.getId());
         userScore.setScore(0);
         return userScoreMapper.insert(userScore);
     }

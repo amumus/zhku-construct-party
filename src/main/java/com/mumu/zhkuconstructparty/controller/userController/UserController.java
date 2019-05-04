@@ -57,7 +57,7 @@ public class UserController {
     @RequestMapping("/portal/user/addUser")
     @ResponseBody
     public ResultObject addUser(UserQueryVo vo){
-        ResultObject resultObject = ResultObject.failResult();
+        ResultObject resultObject = ResultObject.successResult();
         try {
             Integer result = userService.addUser(vo);
             if(result != 1){
@@ -88,6 +88,10 @@ public class UserController {
         }
         return resultObject;
     }
-
+    @RequestMapping("/portal/user/getCollegeList")
+    @ResponseBody
+    public ResultObject getCollegeList(){
+        return null;
+    }
 
 }
