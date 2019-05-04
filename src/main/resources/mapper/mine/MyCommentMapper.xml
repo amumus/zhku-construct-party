@@ -66,4 +66,8 @@
         select * from comment where root_id = #{id} ORDER BY CREATED
     </select>
 
+    <select id="getCommentChildrenList" resultType="java.util.Map" parameterType="java.lang.Integer">
+        SELECT c.*,u.user_name FROM `comment` c,`user` u WHERE root_id = #{id} AND c.user_id = u.id;
+    </select>
+
 </mapper>

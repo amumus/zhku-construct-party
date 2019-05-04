@@ -49,6 +49,7 @@ public class CommentController {
     @RequestMapping("/uniApp/comment/getMyCommentList")
     @ResponseBody
     public ResultObject getMyCommentList(CommentDto commentDto){
+
         ResultObject resultObject = ResultObject.successResult();
         Map map = commentService.getMyCommentList(commentDto);
         resultObject.setData(map);

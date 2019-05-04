@@ -115,8 +115,8 @@ public class ScoreServiceImpl implements ScoreService {
             }
         }
 
-        myUserScoreMapper.updateUserScoreByIdSelect(userScore);
-        userScoreDetailMapper.insert(userScoreDetail);
+//        myUserScoreMapper.updateUserScoreByIdSelect(userScore);
+//        userScoreDetailMapper.insert(userScoreDetail);
         return result;
     }
 
@@ -169,7 +169,7 @@ public class ScoreServiceImpl implements ScoreService {
                 long currentTime = System.currentTimeMillis() / 1000;
                 long oldTime = Long.valueOf(jedisUtilService.getSTRINGS().get(key));
                 long timeDifference = currentTime - oldTime ;
-                //如果时间差在4.5分钟，说明是正常访问，执行加分或者添加累计时间，时间差小于4.5分钟说明是恶意刷分
+                //如果时间差在110秒，说明是正常访问，执行加分或者添加累计时间，时间差小于110秒说明是恶意刷分
                 if(timeDifference > 110L) {
                     String s = String.valueOf(Integer.parseInt(flagValue)+1);
                     //已经十二分钟,2分钟请求一次,加积分

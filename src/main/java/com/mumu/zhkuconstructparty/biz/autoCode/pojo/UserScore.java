@@ -1,5 +1,7 @@
 package com.mumu.zhkuconstructparty.biz.autoCode.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -9,7 +11,7 @@ public class UserScore implements Serializable {
     private Integer score;
 
     private String name;
-
+    @JsonFormat(pattern="yyyy-MM-dd hh:mm:ss",timezone = "GMT+8")
     private Date lastModData;
 
     private static final long serialVersionUID = 1L;

@@ -1,11 +1,13 @@
 package com.mumu.zhkuconstructparty.biz.autoCode.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 
 public class UserScoreDetail implements Serializable {
     private Integer id;
-
+    @JsonFormat(pattern="yyyy-MM-dd hh:mm:ss",timezone = "GMT+8")
     private Date occurTime;
 
     private Integer userId;

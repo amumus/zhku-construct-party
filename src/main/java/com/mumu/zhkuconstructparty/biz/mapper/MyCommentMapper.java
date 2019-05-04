@@ -5,6 +5,7 @@ import com.mumu.zhkuconstructparty.dto.CommentDto.CommentDto;
 import com.mumu.zhkuconstructparty.vo.CommentVo.CommentVo;
 
 import java.util.List;
+import java.util.Map;
 
 public interface MyCommentMapper {
     List<Comment> getCommentListByIdAndType(CommentDto commentDto);
@@ -15,4 +16,6 @@ public interface MyCommentMapper {
     Integer getMyCommentListCount(CommentDto commentDto);
 
     List<CommentVo> selectByRootId(Integer id);
+
+    List<Map> getCommentChildrenList(Integer id);
 }

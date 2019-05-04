@@ -207,11 +207,14 @@ public class CommentServiceImpl implements CommentService {
             vo.setParentUserId(parentUser.getId());
             vo.setParentUserName(parentUser.getUserName());
         }
+        //获取子评论
+        List<Map> childrenComment = myCommentMapper.getCommentChildrenList(id);
 
         result.put("comment",comment);
         result.put("user",userMap.get(comment.getUserId()));
 
         result.put("list",commentVoList);
+        result.put("childrenComment",childrenComment);
         return result;
     }
 }
