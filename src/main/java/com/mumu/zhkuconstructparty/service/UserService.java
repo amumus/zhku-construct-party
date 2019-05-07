@@ -15,4 +15,8 @@ public interface UserService {
     Integer deleteByIdentityCode(UserQueryVo vo) throws CommonException;
 
     User login(UserQueryVo user);
+
+    List<Map> getCollegeList();
+
+    List<Map> getMajorList(Map map);
 }

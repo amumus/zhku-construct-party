@@ -17,10 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class ScoreServiceImpl implements ScoreService {
@@ -286,5 +283,60 @@ public class ScoreServiceImpl implements ScoreService {
         Integer count = myUserScoreMapper.getUserScoreListCount(userScoreDto);
         result.put("count",count);
         return result;
+    }
+
+    @Override
+    public Map getTop10Student(String college, String major) {
+        Map result = new HashMap();
+        Map query = new HashMap();
+        query.put("college",college);
+        query.put("major",major);
+        List<Map> list = myUserScoreMapper.getTop10Student(query);
+        List<String> nameList = new ArrayList<>();
+        List<Integer> scoreList = new ArrayList<>();
+        for(Map m:list){
+            nameList.add((String) m.get("name"));
+            scoreList.add((Integer) m.get("score"));
+        }
+        result.put("scoreList",scoreList);
+        result.put("nameList",nameList);
+        return result;
+    }
+
+    @Override
+    public List scorePercentList(String college, String major) {
+        Map query = new HashMap();
+        query.put("college",college);
+        query.put("major",major);
+        List<Map> list = myUserScoreMapper.getScorePercentList(query);
+//        List<ScoreTask> scoreTaskList = scoreTaskMapper.selectAll();
+//        Map scoreTaskMap = new HashMap();
+//        for(ScoreTask scoreTask : scoreTaskList){
+//            scoreTaskMap.put("id",scoreTask.get);
+//        }
+        for(Map m :list){
+            Integer id = (Integer) m.get("id");
+            switch (id){
+                case 1:
+                    m.put("name","登录积分");
+                    break;
+                case 2:
+                    m.put("name","学习文章时长积分");
+                    break;
+                case 3:
+                    m.put("name","学习视频时长积分");
+                    break;
+                case 4:
+                    m.put("name","学习文章数积分");
+                    break;
+                case 5:
+                    m.put("name","学习视频数积分");
+                    break;
+                case 6:
+                    m.put("name","评论积分");
+                    break;
+            }
+        }
+        return list;
     }
 }

@@ -4,6 +4,7 @@ import com.mumu.zhkuconstructparty.biz.autoCode.pojo.User;
 import com.mumu.zhkuconstructparty.vo.UserVo.UserQueryVo;
 
 import java.util.List;
+import java.util.Map;
 
 public interface MyUserMapper {
     List<User> listUsers(UserQueryVo vo);
@@ -18,4 +19,8 @@ public interface MyUserMapper {
     Integer insert(User record);
 
     List<User> getUserListByIds(List<Integer> list);
+
+    List<Map> getCollegeList();
+
+    List<Map> getMajorList(Map map);
 }

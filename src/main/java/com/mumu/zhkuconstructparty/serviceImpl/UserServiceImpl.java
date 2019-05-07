@@ -66,5 +66,15 @@ public class UserServiceImpl implements UserService{
         return myUserMapper.login(user);
     }
 
+    @Override
+    public List<Map> getCollegeList() {
+        return myUserMapper.getCollegeList();
+    }
+
+    @Override
+    public List<Map> getMajorList(Map map) {
+        return myUserMapper.getMajorList(map);
+    }
+
 
 }

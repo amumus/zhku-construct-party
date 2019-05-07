@@ -71,5 +71,19 @@ public class ScoreController {
         return resultObject;
     }
 
+    @RequestMapping("/portal/score/getTop10Student")
+    @ResponseBody
+    public ResultObject getTop10Student(String college,String major){
+        ResultObject resultObject = ResultObject.successResult();
+        resultObject.setData(scoreService.getTop10Student(college,major));
+        return resultObject;
+    }
+    @RequestMapping("/portal/score/scorePercentList")
+    @ResponseBody
+    public ResultObject scorePercentList(String college,String major){
+        ResultObject resultObject = ResultObject.successResult();
+        resultObject.setData(scoreService.scorePercentList(college,major));
+        return resultObject;
+    }
 
 }

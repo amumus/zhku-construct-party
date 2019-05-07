@@ -134,4 +134,14 @@
             #{id}
         </foreach>
     </select>
+    <select id="getCollegeList" resultType="java.util.Map">
+        SELECT DISTINCT  college as `value` FROM `user`
+    </select>
+    <select id="getMajorList" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT DISTINCT  major as `value` FROM `user`
+        WHERE 1=1
+        <if test="college != null and college != ''">
+          AND college = #{college}
+        </if>
+    </select>
 </mapper>

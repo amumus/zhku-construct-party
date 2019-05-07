@@ -23,4 +23,8 @@ public interface MyUserScoreMapper {
     List<Map> getUserScoreList(UserScoreDto userScoreDto);
 
     Integer getUserScoreListCount(UserScoreDto userScoreDto);
+
+    List<Map> getTop10Student(Map query);
+
+    List<Map> getScorePercentList(Map query);
 }

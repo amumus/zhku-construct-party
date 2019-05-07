@@ -11,8 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -91,7 +93,18 @@ public class UserController {
     @RequestMapping("/portal/user/getCollegeList")
     @ResponseBody
     public ResultObject getCollegeList(){
-        return null;
+        ResultObject resultObject = ResultObject.successResult();
+        resultObject.setData(userService.getCollegeList());
+        return resultObject;
     }
-
+    @RequestMapping("/portal/user/getMajorList")
+    @ResponseBody
+    public ResultObject getMajorList(String college){
+        Map map = new HashMap();
+        map.put("college",college);
+//        String college = (String) map.get("college");
+        ResultObject resultObject = ResultObject.successResult();
+        resultObject.setData(userService.getMajorList(map));
+        return resultObject;
+    }
 }

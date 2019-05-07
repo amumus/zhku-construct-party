@@ -69,5 +69,26 @@
             and major = #{major}
         </if>
     </select>
-
+    <select id="getTop10Student" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT * FROM `user`,`user_score` WHERE user_id = `user`.`id`
+        <if test="college != null and college != ''">
+            AND `college`= #{college}
+        </if>
+        <if test="major != null and major !=''">
+            AND `major` = #{major}
+        </if>
+        ORDER BY score DESC LIMIT 0 , 10
+    </select>
+    <select id="getScorePercentList" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT SUM(integral_score) as `value`,score_id as id
+        FROM user_score_detail,`user`
+        WHERE user_id = `user`.`id`
+        <if test="college != null and college != ''">
+            AND `college`= #{college}
+        </if>
+        <if test="major != null and major !=''">
+            AND `major` = #{major}
+        </if>
+        GROUP BY score_id ORDER BY score_id;
+    </select>
 </mapper>
